@@ -24,7 +24,7 @@ namespace SolidJokes {
             if (controllerType == typeof(HomeController)) {
                 return new HomeController(logger);
             }
-
+            // AccountController will still go the normal tightly coupled way
             return base.GetControllerInstance(requestContext, controllerType);
         }
     }
