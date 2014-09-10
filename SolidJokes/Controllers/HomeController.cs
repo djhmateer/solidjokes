@@ -1,7 +1,8 @@
 ﻿using System.Web.Mvc;
 
 namespace SolidJokes.Controllers {
-    public class HomeController : Controller {
+    public class HomeController : Controller, IHomeController
+    {
         public ActionResult Index() {
             return View();
         }
