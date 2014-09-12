@@ -5,8 +5,12 @@ using Core.Services;
 
 namespace SolidJokes.Controllers {
     public class HomeController : Controller, IHomeController {
+        private readonly IJokeViewer viewer;
+        public HomeController(IJokeViewer viewer) {
+            this.viewer = viewer;
+        }
+
         public ActionResult Index() {
-            var viewer = new JokeViewer();
             List<Joke> jokes = viewer.ShowAllJokesHighestRatingFirst();
             return View(jokes);
         }

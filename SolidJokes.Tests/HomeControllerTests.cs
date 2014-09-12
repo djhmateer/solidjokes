@@ -1,4 +1,7 @@
-﻿using SolidJokes.Controllers;
+﻿using System.Collections.Generic;
+using Core.Models;
+using Core.Services;
+using SolidJokes.Controllers;
 using System.Web.Mvc;
 using Xunit;
 
@@ -7,7 +10,8 @@ namespace SolidJokes.Tests {
         [Fact]
         public void Index() {
             // Arrange
-            var controller = new HomeController();
+            var viewer = new FakeJokeViewer();
+            var controller = new HomeController(viewer);
 
             // Act
             var result = controller.Index() as ViewResult;
@@ -16,22 +20,28 @@ namespace SolidJokes.Tests {
             Assert.NotNull(result);
         }
 
-        [Fact]
-        public void About() {
-            var controller = new HomeController();
+        //[Fact]
+        //public void About() {
+        //    var controller = new HomeController();
 
-            var result = controller.About() as ViewResult;
+        //    var result = controller.About() as ViewResult;
 
-            Assert.Equal("Your application description page.", result.ViewBag.Message);
-        }
+        //    Assert.Equal("Your application description page.", result.ViewBag.Message);
+        //}
 
-        [Fact]
-        public void Contact() {
-            var controller = new HomeController();
+        //[Fact]
+        //public void Contact() {
+        //    var controller = new HomeController();
 
-            var result = controller.Contact() as ViewResult;
+        //    var result = controller.Contact() as ViewResult;
 
-            Assert.NotNull(result);
+        //    Assert.NotNull(result);
+        //}
+    }
+
+    public class FakeJokeViewer : IJokeViewer {
+        public List<Joke> ShowAllJokesHighestRatingFirst() {
+            return null;
         }
     }
 }

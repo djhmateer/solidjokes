@@ -4,14 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Core.Services {
-    public class JokeViewer {
-        public List<Joke> ShowAllJokesHighestRatingFirst() {
-            List<Joke> result;
-            using (var session = new Session()) {
-                result = session.Jokes
-                    .OrderByDescending(s => s.Rating)
-                    .ToList();
-            }
+
+    public interface IJokeViewer { List<Joke> ShowAllJokesHighestRatingFirst();}
+    public class JokeViewer : IJokeViewer {
+        private readonly ISession session;
+        public JokeViewer(ISession session) {
+            this.session = session;
+        }
+
+        public List<Joke> ShowAllJokesHighestRatingFirst()
+        {
+            var result = session.Jokes
+                .OrderByDescending(s => s.Rating)
+                .ToList();
             return result;
         }
     }
