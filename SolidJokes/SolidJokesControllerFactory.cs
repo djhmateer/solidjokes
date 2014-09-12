@@ -1,7 +1,7 @@
+using SolidJokes.Controllers;
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
-using SolidJokes.Controllers;
 
 namespace SolidJokes {
     public class SolidJokesControllerFactory : DefaultControllerFactory {
