@@ -6,11 +6,9 @@ using Core.Services;
 namespace SolidJokes.Controllers {
     public class HomeController : Controller, IHomeController {
         public ActionResult Index() {
-            var viewer = new StoryViewer();
-            List<Story> stories = null;
-            stories = viewer.ShowAllStoriesHighestRatingFirst();
-            return View(stories);
-
+            var viewer = new JokeViewer();
+            List<Joke> jokes = viewer.ShowAllJokesHighestRatingFirst();
+            return View(jokes);
         }
 
         public ActionResult About() {

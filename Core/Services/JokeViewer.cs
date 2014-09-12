@@ -1,17 +1,14 @@
-﻿using System;
+﻿using Core.DB;
+using Core.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.DB;
-using Core.Models;
 
 namespace Core.Services {
-    public class StoryViewer {
-        public List<Story> ShowAllStoriesHighestRatingFirst() {
-            List<Story> result;
+    public class JokeViewer {
+        public List<Joke> ShowAllJokesHighestRatingFirst() {
+            List<Joke> result;
             using (var session = new Session()) {
-                result = session.Stories
+                result = session.Jokes
                     .OrderByDescending(s => s.Rating)
                     .ToList();
             }
