@@ -87,9 +87,9 @@
       <Project>{C15CDE0E-E3DB-4A8D-8770-2E1DA99A1127}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SolidJokes\SolidJokes.csproj">
+    <ProjectReference Include="..\SolidJokes\Web.csproj">
       <Project>{0932242b-2b46-410f-aad1-5efb61565129}</Project>
-      <Name>SolidJokes</Name>
+      <Name>Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

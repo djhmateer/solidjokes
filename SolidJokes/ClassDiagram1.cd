@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Comment CommentText="Composition Root - if HomeController new up a HomeControllerLogger and pass into that a HomeController">
+  <Comment CommentText="Composition Root - newing up objects here">
     <Position X="2.24" Y="0.5" Height="0.604" Width="2.356" />
   </Comment>
   <Comment CommentText="Decorator - HomeControllerLogger decorates HomeController">
-    <Position X="11.823" Y="1.677" Height="0.75" Width="1.7" />
+    <Position X="13.073" Y="0.5" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="Global.asax">
     <Position X="0.552" Y="0.5" Height="0.385" Width="0.992" />
   </Comment>
-  <Comment CommentText="How to think about object composition here - probably want some kind of service which is injected in">
-    <Position X="8.635" Y="4.573" Height="1.062" Width="1.7" />
+  <Comment CommentText="Core.Services">
+    <Position X="0.5" Y="3.261" Height="0.375" Width="1.169" />
   </Comment>
-  <Comment CommentText="Service">
-    <Position X="0.615" Y="5.615" Height="0.375" Width="1.169" />
+  <Comment CommentText="Core.DB">
+    <Position X="0.531" Y="5.146" Height="0.521" Width="0.898" />
   </Comment>
-  <Comment CommentText="EF - Repository / DAL">
-    <Position X="0.698" Y="7.948" Height="0.594" Width="1.169" />
+  <Comment CommentText="HomeControllerTests - not really much logic in the controller (skinny)">
+    <Position X="5.687" Y="2.229" Height="0.75" Width="1.7" />
   </Comment>
-  <Comment CommentText="HomeControllerTests">
-    <Position X="5.458" Y="3.844" Height="0.75" Width="1.7" />
+  <Comment CommentText="FakeJokeViewer : IJokeViewer">
+    <Position X="7.667" Y="2.24" Height="0.75" Width="2.044" />
   </Comment>
-  <Comment CommentText="FakeJokeViewer">
-    <Position X="6.135" Y="4.677" Height="0.75" Width="1.7" />
+  <Comment CommentText="JokeViewerTests - the bulk of the business logic in services">
+    <Position X="5.728" Y="3.323" Height="0.75" Width="1.7" />
   </Comment>
-  <Comment CommentText="JokeViewerTests">
-    <Position X="5.562" Y="6.438" Height="0.75" Width="1.7" />
+  <Comment CommentText="FakeSession : ISession">
+    <Position X="7.729" Y="3.333" Height="0.75" Width="1.7" />
   </Comment>
-  <Comment CommentText="ISession&#xD;&#xA; Jokes">
-    <Position X="4.438" Y="8.073" Height="0.75" Width="1.7" />
+  <Comment CommentText="Web">
+    <Position X="0.5" Y="2.428" Height="0.375" Width="1.169" />
   </Comment>
   <Class Name="SolidJokes.SolidJokesControllerFactory" Collapsed="true">
     <Position X="2.25" Y="1.25" Width="2.25" />
@@ -45,7 +45,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SolidJokes.Controllers.HomeController" Collapsed="true">
-    <Position X="2.25" Y="3.75" Width="1.5" />
+    <Position X="2.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEACAAAAACAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Controllers\HomeController.cs</FileName>
@@ -53,7 +53,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SolidJokes.HomeControllerLogger" Collapsed="true">
-    <Position X="11.75" Y="2.75" Width="2" />
+    <Position X="13" Y="1.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEACAAAAAAAAAAAAAAIAAEAAAAAAAA=</HashCode>
       <FileName>HomeControllerLogger.cs</FileName>
@@ -64,21 +64,21 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.Services.JokeViewer">
-    <Position X="2.25" Y="5.5" Width="2.5" />
+    <Position X="2.25" Y="3.25" Width="2.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Core.DB.Session">
-    <Position X="2.5" Y="8" Width="1.5" />
+    <Position X="2.25" Y="5" Width="1.5" />
     <TypeIdentifier />
-    <Lollipop Position="0.2" />
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Core.Models.Joke">
-    <Position X="8.75" Y="9" Width="1.5" />
+  <Class Name="Core.Models.Joke" Collapsed="true">
+    <Position X="4" Y="5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Interface Name="SolidJokes.Controllers.IHomeController" Collapsed="true">
-    <Position X="8.75" Y="2.75" Width="1.5" />
+    <Position X="10" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Controllers\IHomeController.cs</FileName>

@@ -20,5 +20,4 @@ namespace SolidJokes.Tests {
     public class FakeSession : ISession {
         public DbSet<Joke> Jokes { get; set; }
     }
-
 }

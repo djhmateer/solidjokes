@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidJokes", "SolidJokes\SolidJokes.csproj", "{0932242B-2B46-410F-AAD1-5EFB61565129}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "SolidJokes\Web.csproj", "{0932242B-2B46-410F-AAD1-5EFB61565129}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9356676A-D3D4-4B7D-A204-2A520163EC7C}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidJokes.Tests", "SolidJokes.Tests\SolidJokes.Tests.csproj", "{74DD4D23-3F1A-493F-B66D-546EAB653A4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "SolidJokes.Tests\Tests.csproj", "{74DD4D23-3F1A-493F-B66D-546EAB653A4A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1AA50927-6299-45B3-97DB-316FBFC94813}"
 	ProjectSection(SolutionItems) = preProject
