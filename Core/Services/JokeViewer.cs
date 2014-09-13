@@ -12,12 +12,16 @@ namespace Core.Services {
             this.session = session;
         }
 
-        public List<Joke> ShowAllJokesHighestRatingFirst()
-        {
-            var result = session.Jokes
-                .OrderByDescending(s => s.Rating)
-                .ToList();
-            return result;
+        public List<Joke> ShowAllJokesHighestRatingFirst() {
+            //return session.Jokes
+            //    .OrderByDescending(s => s.Rating)
+            //    .ToList();
+
+            // something wrong in test implementation maybe..have to call tolist here.
+            var list = session.Jokes.ToList();
+            //var list = session.Jokes;
+            var orderedList = list.OrderByDescending(x => x.Rating).ToList();
+            return orderedList;
         }
     }
 }
