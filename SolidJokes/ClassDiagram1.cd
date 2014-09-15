@@ -15,13 +15,13 @@
   <Comment CommentText="Core.DB">
     <Position X="0.531" Y="5.146" Height="0.521" Width="0.898" />
   </Comment>
-  <Comment CommentText="HomeControllerTests - not really much logic in the controller (skinny) HomeController_WhenPassedInFakeJokeViewerReturning2Jokes_ShouldPassBackListOf2Jokes">
+  <Comment CommentText="HomeControllerTests - uses JokeViewer HomeController_WhenPassedInFakeJokeViewerReturning2Jokes_ShouldPassBackListOf2Jokes">
     <Position X="4.927" Y="2.229" Height="0.906" Width="3.231" />
   </Comment>
   <Comment CommentText="FakeJokeViewer : IJokeViewer">
     <Position X="8.24" Y="2.282" Height="0.75" Width="2.044" />
   </Comment>
-  <Comment CommentText="JokeViewerTests ShowAllJokesHighestRatingFirst_AListOfJokes_ShouldDisplayInRatingOrder">
+  <Comment CommentText="JokeViewerTests - uses Session ShowAllJokesHighestRatingFirst_AListOfJokes_ShouldDisplayInRatingOrder">
     <Position X="4.957" Y="3.323" Height="1.135" Width="3.231" />
   </Comment>
   <Comment CommentText="FakeSession : ISession">

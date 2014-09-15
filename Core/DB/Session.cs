@@ -4,6 +4,7 @@ using System.Data.Entity;
 namespace Core.DB {
     public interface ISession {
         DbSet<Joke> Jokes { get; set; }
+        int SaveChanges();
     }
 
     public class Session : DbContext, ISession {
