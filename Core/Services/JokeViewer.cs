@@ -1,12 +1,14 @@
-﻿using System.Security.Cryptography;
-using Core.DB;
+﻿using Core.DB;
 using Core.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Core.Services {
 
-    public interface IJokeViewer { List<Joke> ShowAllJokesHighestRatingFirst();}
+    public interface IJokeViewer {
+        List<Joke> ShowAllJokesHighestRatingFirst();
+        Joke AddJoke(string title, int rating);
+    }
     public class JokeViewer : IJokeViewer {
         private readonly ISession session;
         public JokeViewer(ISession session) {
@@ -14,26 +16,17 @@ namespace Core.Services {
         }
 
         public List<Joke> ShowAllJokesHighestRatingFirst() {
-            //return session.Jokes
-            //    .OrderByDescending(s => s.Rating)
-            //    .ToList();
+            return session.Jokes
+                .OrderByDescending(s => s.Rating)
+                .ToList();
+        }
 
-            // something wrong in test implementation maybe..have to call tolist here.
-            //var list = session.Jokes.ToList();
-            var list = session.Jokes;
-
-            var orderedList = list.OrderByDescending(x => x.Rating).ToList();
-            //var query = session.Jokes.OrderBy(x => x.Rating);
-
-            //var query = from b in session.Jokes
-            //    orderby b.Title
-            //    select b;
-            
-            //var orderedList = query.ToList();
-
-            
-
-            return orderedList;
+        // Should be in another object - JokeAdder?
+        public Joke AddJoke(string title, int rating) {
+            var joke = new Joke { Title = title, Rating = rating };
+            session.Jokes.Add(joke);
+            session.SaveChanges();
+            return joke;
         }
     }
 }

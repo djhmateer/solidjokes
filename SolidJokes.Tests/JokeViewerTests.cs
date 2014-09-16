@@ -27,6 +27,20 @@ namespace SolidJokes.Tests {
             Assert.Equal("Airport", result[1].Title);
             Assert.Equal("Banana", result[2].Title);
         }
+
+        [Fact]
+        public void AddJoke_GivenTitleAndRating_ShouldSaveToDbAndBeAvailableInTheSession()
+        {
+            var session = new FakeSession();
+            var viewer = new JokeViewer(session);
+
+            var result = viewer.AddJoke("sausage", 2);
+
+            Assert.Equal(1, session.Jokes.Count());
+            Assert.Equal("sausage", session.Jokes.Single().Title);
+            Assert.Equal(2, session.Jokes.Single().Rating);
+            Assert.Equal(1, session.SaveChangesCount);
+        }
     }
 
     public class FakeSession : ISession {
@@ -34,8 +48,8 @@ namespace SolidJokes.Tests {
         public int SaveChangesCount { get; private set; }
 
         public FakeSession() {
-            //this.Jokes = new TestDbSet<Joke>();
-            this.Jokes = new TestJokeDbSet();
+            this.Jokes = new TestDbSet<Joke>();
+            //this.Jokes = new TestJokeDbSet();
         }
 
         public int SaveChanges() {
@@ -46,12 +60,12 @@ namespace SolidJokes.Tests {
 
     //The Find method is difficult to implement in a generic fashion. 
     //If you need to test code that makes use of the Find method it is easiest to create a test DbSet for each of the entity types that need to support find
-    public class TestJokeDbSet : TestDbSet<Joke> {
-        public override Joke Find(params object[] keyValues) {
-            var id = (int)keyValues.Single();
-            return this.SingleOrDefault(b => b.ID == id);
-        }
-    } 
+    //public class TestJokeDbSet : TestDbSet<Joke> {
+    //    public override Joke Find(params object[] keyValues) {
+    //        var id = (int)keyValues.Single();
+    //        return this.SingleOrDefault(b => b.ID == id);
+    //    }
+    //} 
 
     public class TestDbSet<TEntity> : DbSet<TEntity>, IQueryable, IEnumerable<TEntity>, IDbAsyncEnumerable<TEntity> where TEntity : class {
         ObservableCollection<TEntity> _data;
