@@ -21,6 +21,12 @@ namespace Core.Services {
                 .ToList();
         }
 
+        public List<Joke> ShowAllJokesByDateCreatedDescending() {
+            return session.Jokes
+                    .OrderByDescending(s => s.CreatedAt)
+                    .ToList();
+        }
+
         // Should be in another object - JokeAdder?
         public Joke AddJoke(string title, int rating) {
             var joke = new Joke { Title = title, Rating = rating };

@@ -12,7 +12,7 @@ namespace Core.Models {
         public StoryType StoryType { get; set; }
 
         public Joke() {
-            this.CreatedAt = DateTime.Now;
+            //this.CreatedAt = DateTime.Now;
             this.StoryType = StoryType.Joke;
         }
     }

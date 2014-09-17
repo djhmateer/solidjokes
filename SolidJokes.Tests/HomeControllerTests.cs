@@ -1,6 +1,4 @@
-﻿using System;
-using Core.Models;
-using Core.Services;
+﻿using Core.Models;
 using SolidJokes.Controllers;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -17,17 +15,6 @@ namespace SolidJokes.Tests {
 
             var list = (List<Joke>)result.Model;
             Assert.Equal(2, list.Count);
-        }
-    }
-
-    public class FakeJokeViewer : IJokeViewer {
-        public List<Joke> ShowAllJokesHighestRatingFirst() {
-            return new List<Joke> { new Joke(), new Joke() };
-        }
-
-        public Joke AddJoke(string title, int rating) {
-            throw new NotImplementedException();
-            //return new Joke { Title = title, Rating = rating };
         }
     }
 }
