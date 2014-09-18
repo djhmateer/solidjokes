@@ -18,11 +18,17 @@
   <Comment CommentText="JokeViewerTests - passes FakeSession">
     <Position X="7.479" Y="3.542" Height="0.583" Width="1.565" />
   </Comment>
+  <Comment CommentText="Decorator - HomeControllerLogger decorates HomeController">
+    <Position X="7.198" Y="1.052" Height="0.833" Width="1.648" />
+  </Comment>
+  <Comment CommentText="Integration Tests">
+    <Position X="12.281" Y="1.427" Height="0.583" Width="1.565" />
+  </Comment>
   <Class Name="SolidJokes.Tests.JokeViewerTests" Collapsed="true">
     <Position X="5.25" Y="3.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACgAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>JokeViewerTests.cs</FileName>
+      <HashCode>AAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Unit\JokeViewerTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SolidJokes.Tests.FakeJokeViewer" Collapsed="true">
@@ -41,7 +47,7 @@
   <Class Name="Core.DB.Session" Collapsed="true">
     <Position X="2.25" Y="4.75" Width="1.5" />
     <TypeIdentifier />
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Models.Joke" Collapsed="true">
     <Position X="4" Y="4.75" Width="1.5" />
@@ -50,7 +56,7 @@
   <Class Name="SolidJokes.Controllers.HomeController" Collapsed="true">
     <Position X="2.25" Y="2.25" Width="1.5" />
     <TypeIdentifier />
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SolidJokes.SolidJokesControllerFactory" Collapsed="true">
     <Position X="2.25" Y="1" Width="2.25" />
@@ -64,7 +70,7 @@
     <Position X="5.25" Y="2.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>HomeControllerTests.cs</FileName>
+      <FileName>Unit\HomeControllerTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SolidJokes.Tests.FakeSession" Collapsed="true" BaseTypeListCollapsed="true">
@@ -73,7 +79,7 @@
       <HashCode>gAAAAAAAAAAAAAAAAAIAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Fakes\FakeSession.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SolidJokes.Tests.TestDbSet&lt;TEntity&gt;" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9.75" Y="4.5" Width="1.75" />
@@ -82,6 +88,26 @@
       <FileName>Fakes\TestDbSet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SolidJokes.HomeControllerLogger" Collapsed="true">
+    <Position X="5" Y="1" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SolidJokes.Tests.Integration.Display.ChangeSortOrderToRating" Collapsed="true">
+    <Position X="11.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Integration\Display\ChangeSortOrderToRating.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SolidJokes.Tests.Integration.IntegrationTestBaseWithData" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Integration\IntegrationTestBaseWithData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Models {
-    public enum StoryType {
+    public enum JokeType {
         Joke,
         Video,
         Quote,

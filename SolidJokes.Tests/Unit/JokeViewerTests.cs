@@ -1,12 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Core.Models;
+﻿using Core.Models;
 using Core.Services;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Linq.Expressions;
 using Xunit;
 
 namespace SolidJokes.Tests {
@@ -14,9 +9,9 @@ namespace SolidJokes.Tests {
         [Fact]
         public void ShowAllJokesHighestRatingFirst_AFakeSessionWithListOfJokes_ShouldReturnListInRatingOrder() {
             var session = new FakeSession();
-            session.Jokes.Add(new Joke() { ID = 1, Rating = 2, Title = "Banana"});
-            session.Jokes.Add(new Joke() { ID = 2, Rating = 9, Title = "Stick"});
-            session.Jokes.Add(new Joke() { ID = 3, Rating = 6, Title = "Airport"});
+            session.Jokes.Add(new Joke { ID = 1, Rating = 2, Title = "Banana"});
+            session.Jokes.Add(new Joke { ID = 2, Rating = 9, Title = "Stick"});
+            session.Jokes.Add(new Joke { ID = 3, Rating = 6, Title = "Airport"});
 
             var viewer = new JokeViewer(session);
             var result = viewer.ShowAllJokesHighestRatingFirst();
@@ -26,16 +21,16 @@ namespace SolidJokes.Tests {
         }
 
         [Fact]
-        public void ShowAllJokesByDateCreatedDescending_AFakeSessionWithListOfJokesWithDateCreatedDesc_ShouldReturnListInDateDescOrder() {
+        public void ShowAllJokesByDateCreatedDescending_AFakeSessionWithListOfJokesWithDateCreatedDesc_ShouldReturnNewestJokesFirst() {
             var session = new FakeSession();
-            session.Jokes.Add(new Joke() { ID = 1, Rating = 2, Title = "Banana", CreatedAt = DateTime.Now});
-            session.Jokes.Add(new Joke() { ID = 2, Rating = 9, Title = "Stick", CreatedAt = DateTime.Now.AddDays(-3) });
-            session.Jokes.Add(new Joke() { ID = 3, Rating = 6, Title = "Airport", CreatedAt = DateTime.Now.AddDays(2)});
+            session.Jokes.Add(new Joke { ID = 1, Rating = 2, Title = "Banana", CreatedAt = DateTime.Now});
+            session.Jokes.Add(new Joke { ID = 2, Rating = 9, Title = "Stick", CreatedAt = DateTime.Now.AddDays(-3) });
+            session.Jokes.Add(new Joke { ID = 3, Rating = 6, Title = "Airport", CreatedAt = DateTime.Now.AddDays(-2)});
 
             var viewer = new JokeViewer(session);
             var result = viewer.ShowAllJokesByDateCreatedDescending();
-            Assert.Equal("Airport", result[0].Title);
-            Assert.Equal("Banana", result[1].Title);
+            Assert.Equal("Banana", result[0].Title);
+            Assert.Equal("Airport", result[1].Title);
             Assert.Equal("Stick", result[2].Title);
         }
 
@@ -53,7 +48,4 @@ namespace SolidJokes.Tests {
             Assert.Equal(1, session.SaveChangesCount);
         }
     }
-
-   
-   
 }

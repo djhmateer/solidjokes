@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="DB\Session.cs" />
     <Compile Include="Models\Joke.cs" />
-    <Compile Include="Models\StoryType.cs" />
+    <Compile Include="Models\JokeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\JokeViewer.cs" />
   </ItemGroup>

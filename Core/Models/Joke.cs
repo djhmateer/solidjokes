@@ -9,11 +9,11 @@ namespace Core.Models {
         public string ImageURL { get; set; }
         public string VideoURL { get; set; }
         public DateTime CreatedAt { get; set; }
-        public StoryType StoryType { get; set; }
+        public JokeType JokeType { get; set; }
 
         public Joke() {
             //this.CreatedAt = DateTime.Now;
-            this.StoryType = StoryType.Joke;
+            this.JokeType = JokeType.Joke;
         }
     }
 }
