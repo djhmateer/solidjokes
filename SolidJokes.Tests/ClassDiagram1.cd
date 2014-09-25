@@ -7,25 +7,25 @@
     <Position X="0.5" Y="0.5" Height="0.333" Width="1.252" />
   </Comment>
   <Comment CommentText="Core.Services">
-    <Position X="0.531" Y="3.49" Height="0.385" Width="1.065" />
+    <Position X="0.531" Y="4.24" Height="0.385" Width="1.065" />
   </Comment>
   <Comment CommentText="Core.DB">
-    <Position X="0.521" Y="4.698" Height="0.385" Width="1.065" />
+    <Position X="0.521" Y="5.448" Height="0.385" Width="1.065" />
   </Comment>
   <Comment CommentText="HomeControllerTests - passes FakeJokeViewer ">
     <Position X="7.271" Y="2.271" Height="0.583" Width="1.565" />
   </Comment>
   <Comment CommentText="JokeViewerTests - passes FakeSession">
-    <Position X="7.479" Y="3.542" Height="0.583" Width="1.565" />
+    <Position X="7.479" Y="4.292" Height="0.583" Width="1.565" />
   </Comment>
   <Comment CommentText="Decorator - HomeControllerLogger decorates HomeController">
-    <Position X="7.198" Y="1.052" Height="0.833" Width="1.648" />
+    <Position X="4.833" Y="0.5" Height="0.833" Width="1.648" />
   </Comment>
   <Comment CommentText="Integration Tests">
     <Position X="12.281" Y="1.427" Height="0.583" Width="1.565" />
   </Comment>
   <Class Name="SolidJokes.Tests.JokeViewerTests" Collapsed="true">
-    <Position X="5.25" Y="3.5" Width="2" />
+    <Position X="5.25" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>Unit\JokeViewerTests.cs</FileName>
@@ -40,17 +40,17 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Services.JokeViewer" Collapsed="true">
-    <Position X="2.25" Y="3.5" Width="2.25" />
+    <Position X="2.25" Y="4.25" Width="2.25" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.DB.Session" Collapsed="true">
-    <Position X="2.25" Y="4.75" Width="1.5" />
+    <Position X="2.25" Y="5.5" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Core.Models.Joke" Collapsed="true">
-    <Position X="4" Y="4.75" Width="1.5" />
+    <Position X="4" Y="5.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="SolidJokes.Controllers.HomeController" Collapsed="true">
@@ -74,7 +74,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SolidJokes.Tests.FakeSession" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="9.25" Y="3.5" Width="1.5" />
+    <Position X="9.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAIAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Fakes\FakeSession.cs</FileName>
@@ -82,22 +82,17 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SolidJokes.Tests.TestDbSet&lt;TEntity&gt;" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="9.75" Y="4.5" Width="1.75" />
+    <Position X="9.75" Y="5.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ACIIAAAABACAAgAgAAAABAAAAIFAAEAAAAAAAAAAgAA=</HashCode>
       <FileName>Fakes\TestDbSet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="SolidJokes.HomeControllerLogger" Collapsed="true">
-    <Position X="5" Y="1" Width="2" />
-    <TypeIdentifier />
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="SolidJokes.Tests.Integration.Display.ChangeSortOrderToRating" Collapsed="true">
-    <Position X="11.5" Y="3.5" Width="2" />
+    <Position X="11.5" Y="4.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAgAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Integration\Display\ChangeSortOrderToRating.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -107,6 +102,16 @@
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Integration\IntegrationTestBaseWithData.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SolidJokes.Controllers.HomeControllerLogger" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Services.JokeViewerLogger" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />

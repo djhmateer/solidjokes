@@ -1,8 +1,7 @@
 using System.Diagnostics;
 using System.Web.Mvc;
-using SolidJokes.Controllers;
 
-namespace SolidJokes {
+namespace SolidJokes.Controllers {
     public class HomeControllerLogger : Controller, IHomeController {
         private readonly IHomeController homeController;
 
