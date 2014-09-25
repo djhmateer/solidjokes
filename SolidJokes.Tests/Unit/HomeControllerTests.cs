@@ -1,10 +1,11 @@
-﻿using Core.Models;
-using SolidJokes.Controllers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using Core.Models;
+using SolidJokes.Controllers;
+using SolidJokes.Tests.Fakes;
 using Xunit;
 
-namespace SolidJokes.Tests {
+namespace SolidJokes.Tests.Unit {
     public class HomeControllerTests {
         [Fact]
         public void HomeController_WhenPassedInFakeJokeViewerReturning2Jokes_ShouldPassBackListOf2Jokes() {

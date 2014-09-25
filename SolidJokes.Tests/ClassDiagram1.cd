@@ -24,14 +24,14 @@
   <Comment CommentText="Integration Tests">
     <Position X="12.281" Y="1.427" Height="0.583" Width="1.565" />
   </Comment>
-  <Class Name="SolidJokes.Tests.JokeViewerTests" Collapsed="true">
+  <Class Name="SolidJokes.Tests.Unit.JokeViewerTests" Collapsed="true">
     <Position X="5.25" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>Unit\JokeViewerTests.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SolidJokes.Tests.FakeJokeViewer" Collapsed="true">
+  <Class Name="SolidJokes.Tests.Fakes.FakeJokeViewer" Collapsed="true">
     <Position X="9.25" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
@@ -66,7 +66,7 @@
     <Position X="0.5" Y="1" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="SolidJokes.Tests.HomeControllerTests" Collapsed="true">
+  <Class Name="SolidJokes.Tests.Unit.HomeControllerTests" Collapsed="true">
     <Position X="5.25" Y="2.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -89,11 +89,12 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="SolidJokes.Tests.Integration.Display.ChangeSortOrderToRating" Collapsed="true">
-    <Position X="11.5" Y="4.25" Width="2" />
+  <Class Name="SolidJokes.Tests.Integration.Display.ChangeSortOrderToNewestFirst" Collapsed="true">
+    <Position X="11.5" Y="4.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAgAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Integration\Display\ChangeSortOrderToRating.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAACAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Integration\Display\ChangeSortOrderToNewestFirst.cs</FileName>
+      <NewMemberFileName>Integration\Display\ChangeSortOrderToRating.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SolidJokes.Tests.Integration.IntegrationTestBaseWithData" Collapsed="true">
@@ -113,6 +114,13 @@
     <Position X="4.75" Y="3.5" Width="1.75" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SolidJokes.Tests.Integration.Display.ChangeSortOrderToRating" Collapsed="true">
+    <Position X="13.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAgAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Integration\Display\ChangeSortOrderToRating.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Fakes\FakeJokeViewer.cs" />
     <Compile Include="Fakes\FakeSession.cs" />
+    <Compile Include="Integration\Display\ChangeSortOrderToNewestFirst.cs" />
     <Compile Include="Integration\Display\ChangeSortOrderToRating.cs" />
     <Compile Include="Integration\IntegrationTestBaseWithData.cs" />
     <Compile Include="Unit\JokeViewerTests.cs" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Core.Models;
 using Core.Services;
 
-namespace SolidJokes.Tests
+namespace SolidJokes.Tests.Fakes
 {
     public class FakeJokeViewer : IJokeViewer {
         public List<Joke> ShowAllJokesHighestRatingFirst() {

@@ -1,10 +1,10 @@
-﻿using Core.Models;
-using Core.Services;
-using System;
+﻿using System;
 using System.Linq;
+using Core.Models;
+using Core.Services;
 using Xunit;
 
-namespace SolidJokes.Tests {
+namespace SolidJokes.Tests.Unit {
     public class JokeViewerTests {
         [Fact]
         public void ShowAllJokesHighestRatingFirst_AFakeSessionWithListOfJokes_ShouldReturnListInRatingOrder() {
