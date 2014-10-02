@@ -8,7 +8,7 @@ namespace Core.DB {
     }
 
     public class Session : DbContext, ISession {
-        public Session() : base(nameOrConnectionString: "Funny") {
+        public Session() : base(nameOrConnectionString: "SolidJokes") {
             // Nice for development
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Session>());
         }

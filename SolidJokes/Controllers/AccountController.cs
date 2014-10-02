@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SolidJokes.Models;
+using SolidJokes.Web.Models;
 
 namespace SolidJokes.Controllers
 {
