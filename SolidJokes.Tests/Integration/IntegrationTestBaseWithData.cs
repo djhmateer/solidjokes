@@ -38,7 +38,7 @@ namespace SolidJokes.Tests.Integration {
         // Useful to comment this out as after each ncrunch test run, so some data is left in the db.. actually unpredictable.. much better to clear down!
         public void Dispose() {
             //new Session().Database.ExecuteSqlCommand("DELETE FROM Votes; DELETE FROM Stories");
-            new Session().Database.ExecuteSqlCommand("DELETE FROM Jokes");
+            //new Session().Database.ExecuteSqlCommand("DELETE FROM Jokes");
         }
     }
 }
