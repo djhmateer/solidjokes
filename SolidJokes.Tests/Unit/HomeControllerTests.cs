@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Core.Models;
 using SolidJokes.Controllers;
 using SolidJokes.Tests.Fakes;
+using SolidJokes.Web.Controllers;
 using Xunit;
 
 namespace SolidJokes.Tests.Unit {

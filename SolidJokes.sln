@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "SolidJokes\Web.csproj", "{0932242B-2B46-410F-AAD1-5EFB61565129}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "SolidJokes.Web\Web.csproj", "{0932242B-2B46-410F-AAD1-5EFB61565129}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9356676A-D3D4-4B7D-A204-2A520163EC7C}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1AA509
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{C15CDE0E-E3DB-4A8D-8770-2E1DA99A1127}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "SolidJokes.Core\Core.csproj", "{C15CDE0E-E3DB-4A8D-8770-2E1DA99A1127}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
