@@ -90,7 +90,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SolidJokes.Tests.Integration.Display.ChangeSortOrderToNewestFirst" Collapsed="true">
-    <Position X="11.5" Y="4.25" Width="2.5" />
+    <Position X="12" Y="4" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAAACAAAAAAAAAgAAAAAAAAAA=</HashCode>
       <FileName>Integration\Display\ChangeSortOrderToNewestFirst.cs</FileName>
