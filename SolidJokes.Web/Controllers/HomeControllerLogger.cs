@@ -9,7 +9,7 @@ namespace SolidJokes.Web.Controllers {
             this.homeController = homeController;
         }
 
-        public ActionResult Index() {
+        public ActionResult Index(string sortOrder = "ratingDescending", string message = "") {
             Debug.WriteLine("In Index of HomeControllerLogger");
             var result = homeController.Index();
             Debug.WriteLine("End Index of HomeControllerLogger");
@@ -21,10 +21,6 @@ namespace SolidJokes.Web.Controllers {
             var result = homeController.About();
             Debug.WriteLine("End About of HomeControllerLogger");
             return result;
-        }
-
-        public ActionResult Contact() {
-            return homeController.Contact();
         }
     }
 }

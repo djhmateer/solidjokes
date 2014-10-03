@@ -4,8 +4,7 @@ namespace SolidJokes.Web.Controllers
 {
     public interface IHomeController
     {
-        ActionResult Index();
+        ActionResult Index(string sortOrder = "ratingDescending", string message = "");
         ActionResult About();
-        ActionResult Contact();
     }
 }

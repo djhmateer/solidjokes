@@ -22,5 +22,10 @@ namespace SolidJokes.Core.Services
             var result = jokeViewer.AddJoke(title, rating);
             return result;
         }
+
+        public List<Joke> ShowAllJokesByDateCreatedDescending()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

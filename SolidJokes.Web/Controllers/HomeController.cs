@@ -10,8 +10,18 @@ namespace SolidJokes.Web.Controllers {
             this.viewer = viewer;
         }
 
-        public ActionResult Index() {
-            List<Joke> jokes = viewer.ShowAllJokesHighestRatingFirst();
+        public ActionResult Index(string sortOrder = "ratingDescending", string message = "") {
+            List<Joke> jokes = null;
+            switch (sortOrder) {
+                case "ratingDescending":
+                    jokes = viewer.ShowAllJokesHighestRatingFirst();
+                    break;
+                case "dateCreatedDescending":
+                    jokes = viewer.ShowAllJokesByDateCreatedDescending();
+                    break;
+            }
+
+            DisplayMessageToUserIfRequired(message);
             return View(jokes);
         }
 
@@ -20,9 +30,14 @@ namespace SolidJokes.Web.Controllers {
             return View();
         }
 
-        public ActionResult Contact() {
-            ViewBag.Message = "Your contact page.";
-            return View();
+        private void DisplayMessageToUserIfRequired(string message) {
+            // Is there a message, and what type to display to user ie green or red
+            if (message.Contains("Thank you for voting!") && message != "") {
+                ViewBag.GreenMessage = true;
+            } else {
+                ViewBag.RedMessage = true;
+            }
+            ViewBag.Message = message;
         }
     }
 }

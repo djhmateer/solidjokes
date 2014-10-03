@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using SolidJokes.Core.DB;
+﻿using SolidJokes.Core.DB;
 using SolidJokes.Core.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SolidJokes.Core.Services {
 
     public interface IJokeViewer {
         List<Joke> ShowAllJokesHighestRatingFirst();
+        List<Joke> ShowAllJokesByDateCreatedDescending();
         Joke AddJoke(string title, int rating);
     }
     public class JokeViewer : IJokeViewer {

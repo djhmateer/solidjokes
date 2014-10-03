@@ -14,5 +14,10 @@ namespace SolidJokes.Tests.Fakes
             throw new NotImplementedException();
             //return new Joke { Title = title, Rating = rating };
         }
+
+        public List<Joke> ShowAllJokesByDateCreatedDescending()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
