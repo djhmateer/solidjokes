@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
-using Core.DB;
-using Core.Models;
+using SolidJokes.Core.DB;
+using SolidJokes.Core.Models;
 
-namespace SolidJokes.Tests
+namespace SolidJokes.Tests.Fakes
 {
     public class FakeSession : ISession {
         public DbSet<Joke> Jokes { get; set; }

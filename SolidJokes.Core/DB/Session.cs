@@ -1,7 +1,7 @@
-﻿using Core.Models;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using SolidJokes.Core.Models;
 
-namespace Core.DB {
+namespace SolidJokes.Core.DB {
     public interface ISession {
         DbSet<Joke> Jokes { get; set; }
         int SaveChanges();

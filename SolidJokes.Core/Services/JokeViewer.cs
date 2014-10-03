@@ -1,9 +1,9 @@
-﻿using Core.DB;
-using Core.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using SolidJokes.Core.DB;
+using SolidJokes.Core.Models;
 
-namespace Core.Services {
+namespace SolidJokes.Core.Services {
 
     public interface IJokeViewer {
         List<Joke> ShowAllJokesHighestRatingFirst();

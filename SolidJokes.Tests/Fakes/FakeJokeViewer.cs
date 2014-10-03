@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Models;
-using Core.Services;
+using SolidJokes.Core.Models;
+using SolidJokes.Core.Services;
 
 namespace SolidJokes.Tests.Fakes
 {

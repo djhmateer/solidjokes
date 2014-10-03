@@ -1,7 +1,7 @@
-﻿using Core.Models;
-using Core.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using SolidJokes.Core.Models;
+using SolidJokes.Core.Services;
 
 namespace SolidJokes.Web.Controllers {
     public class HomeController : Controller, IHomeController {

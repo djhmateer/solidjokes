@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using Core.Models;
+using SolidJokes.Core.Models;
 
-namespace Core.Services
+namespace SolidJokes.Core.Services
 {
     public class JokeViewerLogger : IJokeViewer {
         private readonly IJokeViewer jokeViewer;

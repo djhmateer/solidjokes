@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Core.Models;
+using SolidJokes.Core.Models;
 using SolidJokes.Tests.Fakes;
 using SolidJokes.Web.Controllers;
 using Xunit;

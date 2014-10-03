@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Models {
+namespace SolidJokes.Core.Models {
     public class Joke {
         public int ID { get; set; }
         public string Title { get; set; }

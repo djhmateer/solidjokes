@@ -1,6 +1,6 @@
-﻿using Core.DB;
-using Core.Models;
-using System;
+﻿using System;
+using SolidJokes.Core.DB;
+using SolidJokes.Core.Models;
 
 namespace SolidJokes.Tests.Integration {
     public class IntegrationTestBaseWithData : IDisposable {

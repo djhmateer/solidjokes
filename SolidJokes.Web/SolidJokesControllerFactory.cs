@@ -1,9 +1,9 @@
+using SolidJokes.Core.DB;
+using SolidJokes.Core.Services;
+using SolidJokes.Web.Controllers;
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Core.DB;
-using Core.Services;
-using SolidJokes.Web.Controllers;
 
 namespace SolidJokes.Web {
     public class SolidJokesControllerFactory : DefaultControllerFactory {

@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SolidJokes.Tests
+namespace SolidJokes.Tests.Fakes
 {
     public class TestDbSet<TEntity> : DbSet<TEntity>, IQueryable, IEnumerable<TEntity>, IDbAsyncEnumerable<TEntity> where TEntity : class {
         ObservableCollection<TEntity> _data;

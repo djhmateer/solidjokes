@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Core.Models;
-using Core.Services;
+using SolidJokes.Core.Models;
+using SolidJokes.Core.Services;
+using SolidJokes.Tests.Fakes;
 using Xunit;
 
 namespace SolidJokes.Tests.Unit {

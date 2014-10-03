@@ -1,7 +1,7 @@
-﻿using Core.DB;
-using Core.Models;
-using Core.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SolidJokes.Core.DB;
+using SolidJokes.Core.Models;
+using SolidJokes.Core.Services;
 using Xunit;
 
 namespace SolidJokes.Tests.Integration.Display {
