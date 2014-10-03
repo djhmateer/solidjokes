@@ -1,12 +1,11 @@
-using Core.DB;
-using Core.Services;
-using SolidJokes.Controllers;
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Core.DB;
+using Core.Services;
 using SolidJokes.Web.Controllers;
 
-namespace SolidJokes {
+namespace SolidJokes.Web {
     public class SolidJokesControllerFactory : DefaultControllerFactory {
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType) {
             if (controllerType == typeof(HomeController)) {

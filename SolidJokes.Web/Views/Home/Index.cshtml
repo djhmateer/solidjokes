@@ -31,12 +31,12 @@
             <!-- Been getting Null and Empty in the database, so coding defensively -->
             <td>
                 @if (!String.IsNullOrEmpty(item.Content)) { @item.Content }
-            @if (!String.IsNullOrEmpty(item.VideoURL)) { <iframe width="210" height="158" src="@item.VideoURL" frameborder="0" allowfullscreen></iframe>}
-            @if (!String.IsNullOrEmpty(item.ImageURL)) { <a href="@item.ImageURL"><img width="210" height="158" src="@item.ImageURL" title="@item.Title" /></a> }
-        </td>
-        <td></td>
-        <td>@String.Format("{0:d-MMM H:mm:ss}", item.CreatedAt)</td>
-    </tr>
+                @if (!String.IsNullOrEmpty(item.VideoURL)) { <iframe width="210" height="158" src="@item.VideoURL" frameborder="0" allowfullscreen></iframe>}
+                @if (!String.IsNullOrEmpty(item.ImageURL)) { <a href="@item.ImageURL"><img width="210" height="158" src="@item.ImageURL" title="@item.Title" /></a> }
+            </td>
+            <td></td>
+            <td>@String.Format("{0:d-MMM H:mm:ss}", item.CreatedAt)</td>
+        </tr>
     }
 </table>
 

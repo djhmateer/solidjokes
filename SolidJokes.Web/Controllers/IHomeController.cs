@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace SolidJokes.Controllers
+namespace SolidJokes.Web.Controllers
 {
     public interface IHomeController
     {

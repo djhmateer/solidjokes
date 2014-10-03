@@ -1,6 +1,5 @@
 ﻿using Core.Models;
 using Core.Services;
-using SolidJokes.Controllers;
 using System.Collections.Generic;
 using System.Web.Mvc;
 

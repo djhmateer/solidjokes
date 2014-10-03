@@ -1,8 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using SolidJokes.Web;
 
-[assembly: OwinStartupAttribute(typeof(SolidJokes.Startup))]
-namespace SolidJokes
+[assembly: OwinStartup(typeof(Startup))]
+namespace SolidJokes.Web
 {
     public partial class Startup
     {

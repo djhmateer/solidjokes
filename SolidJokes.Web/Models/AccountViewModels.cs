@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SolidJokes.Models
+namespace SolidJokes.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
