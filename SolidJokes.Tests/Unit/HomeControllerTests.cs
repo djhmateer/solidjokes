@@ -10,7 +10,8 @@ namespace SolidJokes.Tests.Unit {
         [Fact]
         public void HomeController_WhenPassedInFakeJokeViewerReturning2Jokes_ShouldPassBackListOf2Jokes() {
             var viewer = new FakeJokeViewer();
-            var controller = new HomeController(viewer);
+            var voter = new FakeJokeVoter();
+            var controller = new HomeController(viewer, voter);
 
             var result = controller.Index(sortOrder:null, message:null) as ViewResult;
 

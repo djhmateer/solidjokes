@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using SolidJokes.Core.Models;
 using SolidJokes.Core.Services;
 
-namespace SolidJokes.Tests.Fakes
-{
+namespace SolidJokes.Tests.Fakes {
     public class FakeJokeViewer : IJokeViewer {
         public List<Joke> ShowAllJokesHighestRatingFirst() {
             return new List<Joke> { new Joke(), new Joke() };
@@ -15,8 +14,7 @@ namespace SolidJokes.Tests.Fakes
             //return new Joke { Title = title, Rating = rating };
         }
 
-        public List<Joke> ShowAllJokesByDateCreatedDescending()
-        {
+        public List<Joke> ShowAllJokesByDateCreatedDescending() {
             throw new NotImplementedException();
         }
     }

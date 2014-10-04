@@ -13,7 +13,8 @@ namespace SolidJokes.Web {
                 //var viewer = new JokeViewer(session);
                 var viewer = new JokeViewerLogger(new JokeViewer(session));
 
-                return new HomeController(viewer);
+                var voter = new JokeVoter(session);
+                return new HomeController(viewer, voter);
                 // Decorating HomeController with HomeControllerLogger
                 //return new HomeControllerLogger(new HomeController(viewer));
             }

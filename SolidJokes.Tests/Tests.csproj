@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fakes\FakeJokeViewer.cs" />
+    <Compile Include="Fakes\FakeJokeVoter.cs" />
     <Compile Include="Fakes\FakeSession.cs" />
     <Compile Include="Integration\Display\ChangeSortOrderToNewestFirst.cs" />
     <Compile Include="Integration\Display\ChangeSortOrderToRating.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SolidJokes.Core.Models {
     public class Joke {
@@ -10,6 +11,7 @@ namespace SolidJokes.Core.Models {
         public string VideoURL { get; set; }
         public DateTime CreatedAt { get; set; }
         public JokeType JokeType { get; set; }
+        public virtual ICollection<Vote> Votes { get; set; }
 
         public Joke() {
             //this.CreatedAt = DateTime.Now;

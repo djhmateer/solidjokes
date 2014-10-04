@@ -6,8 +6,11 @@ using SolidJokes.Core.Services;
 namespace SolidJokes.Web.Controllers {
     public class HomeController : Controller, IHomeController {
         private readonly IJokeViewer viewer;
-        public HomeController(IJokeViewer viewer) {
+        private readonly IJokeVoter voter;
+
+        public HomeController(IJokeViewer viewer, IJokeVoter voter) {
             this.viewer = viewer;
+            this.voter = voter;
         }
 
         public ActionResult Index(string sortOrder, string message) {
@@ -25,10 +28,6 @@ namespace SolidJokes.Web.Controllers {
             return View(jokes);
         }
 
-        public ActionResult About() {
-            return View();
-        }
-
         private void DisplayMessageToUserIfRequired(string message) {
             // Is there a message, and what type to display to user ie green or red
             if (message != null) {
@@ -39,6 +38,16 @@ namespace SolidJokes.Web.Controllers {
                 }
                 ViewBag.Message = message;
             }
+        }
+
+        public ActionResult Vote(int? storyID, string sortOrder = "ratingDescending") {
+            var result = voter.AddVote(storyID);
+            // Display success or fail message of voting
+            return RedirectToAction("Index", "Home", new { sortOrder = sortOrder, message = result.Message });
+        }
+
+        public ActionResult About() {
+            return View();
         }
     }
 }

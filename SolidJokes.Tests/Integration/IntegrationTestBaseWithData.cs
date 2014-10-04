@@ -6,8 +6,8 @@ namespace SolidJokes.Tests.Integration {
     public class IntegrationTestBaseWithData : IDisposable {
         public IntegrationTestBaseWithData() {
             var session = new Session();
-            //session.Database.ExecuteSqlCommand("DELETE FROM Votes; DELETE FROM Jokes");
-            session.Database.ExecuteSqlCommand("DELETE FROM Jokes");
+            session.Database.ExecuteSqlCommand("DELETE FROM Votes; DELETE FROM Jokes");
+            //session.Database.ExecuteSqlCommand("DELETE FROM Jokes");
 
             session.Jokes.Add(new Joke {
                 JokeType = JokeType.Joke,
