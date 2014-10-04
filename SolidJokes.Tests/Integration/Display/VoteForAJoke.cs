@@ -3,7 +3,7 @@ using SolidJokes.Core.DB;
 using SolidJokes.Core.Services;
 using Xunit;
 
-namespace SolidJokes.Tests.Integration.CoreServices {
+namespace SolidJokes.Tests.Integration.Display {
     [Trait("Homepage", "User votes for a Joke")]
     public class VoteForAJoke : IntegrationTestBaseWithData {
         readonly JokeVoter jokeVoter;

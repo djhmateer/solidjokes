@@ -50,25 +50,25 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="SolidJokes.Tests.Integration.CoreServices.VoteForAJoke" Collapsed="true">
+  <Class Name="SolidJokes.Tests.Integration.Display.VoteForAJoke" Collapsed="true">
     <Position X="4.75" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAABAACAAAAAAAAAAAAAAAAAAABAA=</HashCode>
-      <FileName>Integration\CoreServices\VoteForAJoke.cs</FileName>
+      <FileName>Integration\Display\VoteForAJoke.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SolidJokes.Tests.Integration.Web.VoteForAJokeSortOrderRemembered" Collapsed="true">
+  <Class Name="SolidJokes.Tests.Integration.Display.VoteForAJokeSortOrderRemembered" Collapsed="true">
     <Position X="4.75" Y="1" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
-      <FileName>Integration\Web\VoteForAJokeSortOrderRemembered.cs</FileName>
+      <FileName>Integration\Display\VoteForAJokeSortOrderRemembered.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SolidJokes.Tests.Integration.CoreServices.VoteForAJokeTwice" Collapsed="true">
+  <Class Name="SolidJokes.Tests.Integration.Display.VoteForAJokeTwice" Collapsed="true">
     <Position X="6.75" Y="4" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAACACAAAAAAAAAAAAAAAAABAA=</HashCode>
-      <FileName>Integration\CoreServices\VoteForAJokeTwice.cs</FileName>
+      <FileName>Integration\Display\VoteForAJokeTwice.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

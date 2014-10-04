@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using SolidJokes.Core.DB;
 using SolidJokes.Core.Models;
 using SolidJokes.Core.Services;
 using Xunit;
 
-namespace SolidJokes.Tests.Integration.CoreServices {
-    [Trait("Homepage", "User visits homepage")]
-    public class ShowAllJokes : IntegrationTestBaseWithData {
+namespace SolidJokes.Tests.Integration.Display {
+    [Trait("Homepage", "User changes sort order to highest rating first")]
+    public class ChangeSortOrderToRating : IntegrationTestBaseWithData {
         readonly JokeViewer viewer;
-        public ShowAllJokes() {
+        public ChangeSortOrderToRating() {
             viewer = new JokeViewer(new Session());
         }
-        [Fact(DisplayName = "Show all Jokes")]
-        public void ShowAllJokesDefault() {
+
+        [Fact(DisplayName = "Show all 3 Stories")]
+        public void ShowAllStories() {
             List<Joke> result = viewer.ShowAllJokesHighestRatingFirst();
-            Assert.Equal(3, result.Count());
+            Assert.Equal(3, result.Count);
         }
-        [Fact(DisplayName = "Show all Jokes with highest rating first")]
-        public void ShowListOfStoriesHighestRatingFirst() {
-            List<Joke> result = viewer.ShowAllJokesHighestRatingFirst();
+        [Fact(DisplayName = "Show all Stories in rating order")]
+        public void ShowListOfStoriesInDescendingRankOrder() {
+            var result = viewer.ShowAllJokesHighestRatingFirst();
             // 10,2,5 is order of insert in db
             // First should be rating of 2
             Assert.Equal(10, result[0].Rating);

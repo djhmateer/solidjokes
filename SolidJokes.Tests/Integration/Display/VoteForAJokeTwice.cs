@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using SolidJokes.Core.DB;
 using SolidJokes.Core.Services;
 using Xunit;
 
-namespace SolidJokes.Tests.Integration.CoreServices {
+namespace SolidJokes.Tests.Integration.Display {
     [Trait("Homepage", "User votes for a Joke twice in the space of 10 seconds")]
     public class VoteForAJokeTwice : IntegrationTestBaseWithData {
        readonly JokeVoter jokeVoter;

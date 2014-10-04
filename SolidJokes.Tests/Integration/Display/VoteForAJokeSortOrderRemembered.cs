@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Web.Mvc;
 using SolidJokes.Core.DB;
 using SolidJokes.Core.Services;
 using SolidJokes.Web.Controllers;
 using Xunit;
 
-namespace SolidJokes.Tests.Integration.Web {
+namespace SolidJokes.Tests.Integration.Display {
     [Trait("Homepage", "User votes for a Joke and SortOrder is remembered")]
     public class VoteForAJokeSortOrderRemembered : IntegrationTestBaseWithData {
 
