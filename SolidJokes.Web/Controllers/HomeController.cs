@@ -41,7 +41,7 @@ namespace SolidJokes.Web.Controllers {
         }
 
         public ActionResult Vote(int? storyID, string sortOrder = "ratingDescending") {
-            var result = voter.AddVote(storyID);
+            JokeVoterResult result = voter.AddVote(storyID);
             // Display success or fail message of voting
             return RedirectToAction("Index", "Home", new { sortOrder = sortOrder, message = result.Message });
         }
