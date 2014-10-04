@@ -11,8 +11,8 @@ namespace SolidJokes.Web.Controllers {
         }
 
         public ActionResult Index(string sortOrder, string message) {
-            List<Joke> jokes = null;
             if (sortOrder == null) sortOrder = "ratingDescending";
+            List<Joke> jokes = null;
             switch (sortOrder) {
                 case "ratingDescending":
                     jokes = viewer.ShowAllJokesHighestRatingFirst();

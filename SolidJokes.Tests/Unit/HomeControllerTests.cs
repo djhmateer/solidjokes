@@ -12,7 +12,7 @@ namespace SolidJokes.Tests.Unit {
             var viewer = new FakeJokeViewer();
             var controller = new HomeController(viewer);
 
-            var result = controller.Index() as ViewResult;
+            var result = controller.Index(sortOrder:null, message:null) as ViewResult;
 
             var list = (List<Joke>)result.Model;
             Assert.Equal(2, list.Count);

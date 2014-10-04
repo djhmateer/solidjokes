@@ -13,9 +13,9 @@ namespace SolidJokes.Web {
                 //var viewer = new JokeViewer(session);
                 var viewer = new JokeViewerLogger(new JokeViewer(session));
 
-                //return new HomeController(viewer);
+                return new HomeController(viewer);
                 // Decorating HomeController with HomeControllerLogger
-                return new HomeControllerLogger(new HomeController(viewer));
+                //return new HomeControllerLogger(new HomeController(viewer));
             }
             // AccountController will still go the normal tightly coupled way
             return base.GetControllerInstance(requestContext, controllerType);
