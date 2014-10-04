@@ -4,7 +4,7 @@ using SolidJokes.Core.Models;
 using SolidJokes.Core.Services;
 using Xunit;
 
-namespace SolidJokes.Tests.Integration.Display {
+namespace SolidJokes.Tests.Integration.CoreServices {
     [Trait("Homepage", "User changes sort order to highest rating first")]
     public class ChangeSortOrderToRating : IntegrationTestBaseWithData {
         readonly JokeViewer viewer;

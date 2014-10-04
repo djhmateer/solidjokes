@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -81,9 +82,11 @@
     <Compile Include="Fakes\FakeJokeViewer.cs" />
     <Compile Include="Fakes\FakeJokeVoter.cs" />
     <Compile Include="Fakes\FakeSession.cs" />
-    <Compile Include="Integration\Display\ChangeSortOrderToNewestFirst.cs" />
-    <Compile Include="Integration\Display\ChangeSortOrderToRating.cs" />
+    <Compile Include="Integration\CoreServices\ChangeSortOrderToNewestFirst.cs" />
+    <Compile Include="Integration\CoreServices\ChangeSortOrderToRating.cs" />
+    <Compile Include="Integration\CoreServices\VoteForAJoke.cs" />
     <Compile Include="Integration\IntegrationTestBaseWithData.cs" />
+    <Compile Include="Integration\Web\VoteForAJokeSortOrderRemembered.cs" />
     <Compile Include="Unit\JokeViewerTests.cs" />
     <Compile Include="Unit\HomeControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +97,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Diagrams\JokeViewerSlice.cd" />
+    <None Include="Diagrams\JokeVoterSlice.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +113,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

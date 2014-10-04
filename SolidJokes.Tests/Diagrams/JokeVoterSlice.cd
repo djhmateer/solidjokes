@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Core.Services">
+    <Position X="0.5" Y="4" Height="0.49" Width="0.971" />
+  </Comment>
+  <Comment CommentText="Core.DB">
+    <Position X="0.51" Y="5.344" Height="0.49" Width="0.971" />
+  </Comment>
+  <Comment CommentText="Integration Tests">
+    <Position X="6.094" Y="2.469" Height="0.49" Width="1.658" />
+  </Comment>
+  <Class Name="SolidJokes.Core.Services.JokeVoterResult" Collapsed="true">
+    <Position X="3" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SolidJokes.Core.Services.JokeVoter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SolidJokes.Core.DB.Session" Collapsed="true">
+    <Position X="1.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SolidJokes.Core.Models.Joke" Collapsed="true">
+    <Position X="3.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SolidJokes.Core.Models.Vote" Collapsed="true">
+    <Position X="4.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Joke" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SolidJokes.Web.Controllers.HomeController" Collapsed="true">
+    <Position X="1.75" Y="1" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SolidJokes.Tests.Integration.IntegrationTestBaseWithData" Collapsed="true">
+    <Position X="6.25" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Integration\IntegrationTestBaseWithData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SolidJokes.Tests.Integration.CoreServices.VoteForAJoke" Collapsed="true">
+    <Position X="5.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAACAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Integration\CoreServices\VoteForAJoke.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
