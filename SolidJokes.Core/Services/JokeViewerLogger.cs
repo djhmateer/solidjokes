@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using SolidJokes.Core.Models;
 
-namespace SolidJokes.Core.Services
-{
+namespace SolidJokes.Core.Services {
     public class JokeViewerLogger : IJokeViewer {
         private readonly IJokeViewer jokeViewer;
 
@@ -23,9 +22,8 @@ namespace SolidJokes.Core.Services
             return result;
         }
 
-        public List<Joke> ShowAllJokesByDateCreatedDescending()
-        {
-            throw new System.NotImplementedException();
+        public List<Joke> ShowAllJokesByDateCreatedDescending() {
+            return jokeViewer.ShowAllJokesByDateCreatedDescending();
         }
     }
 }
