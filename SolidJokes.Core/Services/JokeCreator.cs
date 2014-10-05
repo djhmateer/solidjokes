@@ -16,6 +16,7 @@ namespace SolidJokes.Core.Services {
         JokeCreatorResult InvalidApplication(string reason);
         JokeCreatorResult CreateOrEditJoke(JokeApplication app);
         Joke GetJokeByID(int id);
+        void DeleteJoke(int id);
     }
 
     public class JokeCreator : IJokeCreator {
@@ -28,6 +29,12 @@ namespace SolidJokes.Core.Services {
 
         public Joke GetJokeByID(int id) {
             return session.Jokes.SingleOrDefault(x => x.ID == id);
+        }
+
+        public void DeleteJoke(int id) {
+            var joke = session.Jokes.SingleOrDefault(x => x.ID == id);
+            session.Jokes.Remove(joke);
+            session.SaveChanges();
         }
 
         bool TitleNotPresent() {

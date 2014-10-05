@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using SolidJokes.Core.Models;
+﻿using SolidJokes.Core.Models;
 using SolidJokes.Core.Services;
+using System.Net;
+using System.Web.Mvc;
 
 namespace SolidJokes.Web.Controllers {
     public interface IJokeController {
@@ -25,8 +21,6 @@ namespace SolidJokes.Web.Controllers {
             return View(viewer.ShowAllJokesByDateCreatedDescending());
         }
 
-
-
         public ActionResult Create() {
             return View();
         }
@@ -42,17 +36,6 @@ namespace SolidJokes.Web.Controllers {
             }
             return View(app);
         }
-
-        //public ActionResult Details(int? id) {
-        //    if (id == null) {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var joke = viewer.GetJokeByID((int)id);
-        //    if (joke == null) {
-        //        return HttpNotFound();
-        //    }
-        //    return View(joke);
-        //}
 
         public ActionResult Edit(int? id) {
             if (id == null) {
@@ -88,28 +71,27 @@ namespace SolidJokes.Web.Controllers {
             return View(app);
         }
 
-        //// GET: /Story/Delete/5
-        //public ActionResult Delete(int? id) {
-        //    if (id == null) {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Story story = db.Stories.Find(id);
-        //    if (story == null) {
-        //        return HttpNotFound();
-        //    }
+        // GET: /Story/Delete/5
+        public ActionResult Delete(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Joke joke = creator.GetJokeByID((int)id);
+            if (joke == null) {
+                return HttpNotFound();
+            }
 
-        //    return View(story);
-        //}
+            return View(joke);
+        }
 
-        //// POST: /Story/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id) {
-        //    Story story = db.Stories.Find(id);
-        //    db.Stories.Remove(story);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        // POST: /Story/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            creator.DeleteJoke(id);
+            return RedirectToAction("Index");
+        }
 
         //protected override void Dispose(bool disposing) {
         //    if (disposing) {
@@ -118,6 +100,4 @@ namespace SolidJokes.Web.Controllers {
         //    base.Dispose(disposing);
         //}
     }
-
-
 }
