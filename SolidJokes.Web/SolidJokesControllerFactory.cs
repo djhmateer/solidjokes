@@ -18,6 +18,18 @@ namespace SolidJokes.Web {
                 // Decorating HomeController with HomeControllerLogger
                 //return new HomeControllerLogger(new HomeController(viewer));
             }
+            if (controllerType == typeof(JokeController)) {
+                var session = new Session();
+                var viewer = new JokeViewer(session);
+                //var viewer = new JokeViewerLogger(new JokeViewer(session));
+
+                //var voter = new JokeVoter(session);
+                return new JokeController(viewer);
+                // Decorating HomeController with HomeControllerLogger
+                //return new HomeControllerLogger(new HomeController(viewer));
+            }
+
+
             // AccountController will still go the normal tightly coupled way
             return base.GetControllerInstance(requestContext, controllerType);
         }
