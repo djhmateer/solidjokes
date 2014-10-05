@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="DB\Session.cs" />
     <Compile Include="Models\Joke.cs" />
+    <Compile Include="Models\JokeApplication.cs" />
     <Compile Include="Models\JokeType.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

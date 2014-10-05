@@ -43,16 +43,16 @@ namespace SolidJokes.Web.Controllers {
         //    return View(app);
         //}
 
-        public ActionResult Details(int? id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var joke = viewer.GetJokeByID((int)id);
-            if (joke == null) {
-                return HttpNotFound();
-            }
-            return View(joke);
-        }
+        //public ActionResult Details(int? id) {
+        //    if (id == null) {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var joke = viewer.GetJokeByID((int)id);
+        //    if (joke == null) {
+        //        return HttpNotFound();
+        //    }
+        //    return View(joke);
+        //}
 
         public ActionResult Edit(int? id) {
             if (id == null) {
@@ -63,17 +63,19 @@ namespace SolidJokes.Web.Controllers {
                 return HttpNotFound();
             }
 
-            // Map to a StoryApplication
-            //var app = new StoryApplication();
-            //app.StoryID = story.ID;
-            //app.Title = story.Title;
-            //app.Content = story.Content;
-            //app.Rating = story.Rating;
-            //app.StoryType = story.StoryType;
-            //app.ImageURL = story.ImageURL;
-            //app.VideoURL = story.VideoURL;
+            var app = new JokeApplication
+            {
+                JokeID = joke.ID,
+                Title = joke.Title,
+                Content = joke.Content,
+                Rating = joke.Rating,
+                JokeType = joke.JokeType,
+                ImageURL = joke.ImageURL,
+                VideoURL = joke.VideoURL,
+                CreatedAt = joke.CreatedAt
+            };
 
-            return View(joke);
+            return View(app);
         }
 
         //[HttpPost]

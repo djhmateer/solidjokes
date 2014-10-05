@@ -31,7 +31,7 @@ namespace SolidJokes.Tests.Integration.Display {
 
         //[Fact(DisplayName = "Default of ratingDescending sort order is remembered")]
         //public void SortOrder() {
-        //    // Get StoryID of last one entered
+        //    // Get JokeID of last one entered
         //    var session = new Session();
         //    int storyID = session.Stories.FirstOrDefault(st => st.Rating == 5).ID;
 
@@ -48,7 +48,7 @@ namespace SolidJokes.Tests.Integration.Display {
 
         //[Fact(DisplayName = "Sorting by date with newest first is remembered")]
         //public void SortOrderDateDescending() {
-        //    // Get StoryID of last one entered
+        //    // Get JokeID of last one entered
         //    var session = new Session();
         //    int storyID = session.Stories.FirstOrDefault(st => st.Rating == 5).ID;
 
