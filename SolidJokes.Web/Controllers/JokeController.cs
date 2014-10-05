@@ -60,7 +60,7 @@ namespace SolidJokes.Web.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var joke = viewer.GetJokeByID((int)id);
+            var joke = creator.GetJokeByID((int)id);
             if (joke == null) {
                 return HttpNotFound();
             }

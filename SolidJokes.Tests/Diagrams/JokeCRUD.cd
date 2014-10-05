@@ -1,43 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Comment CommentText="Core.Services">
-    <Position X="0.5" Y="4.052" Height="0.469" Width="1.096" />
+    <Position X="0.5" Y="4.75" Height="0.469" Width="1.096" />
   </Comment>
   <Comment CommentText="Composition Root - passing JokeViewer service and JokeEditor service to JokeController">
-    <Position X="1.958" Y="0.5" Height="0.719" Width="2.45" />
+    <Position X="0.5" Y="0.5" Height="0.719" Width="2.45" />
   </Comment>
   <Comment CommentText="Core.DB">
-    <Position X="0.5" Y="5.448" Height="0.469" Width="1.096" />
+    <Position X="0.5" Y="5.958" Height="0.469" Width="1.096" />
   </Comment>
-  <Comment CommentText="JokeApplication has DataAnnotations and behaviour (used in Console project).  Has a JokeApplicationStatus">
-    <Position X="4.719" Y="1.469" Height="0.885" Width="2.2" />
+  <Comment CommentText="JokeApplication has DataAnnotations and a JokeApplicationStatus, and Message">
+    <Position X="3.281" Y="2.521" Height="0.802" Width="1.721" />
+  </Comment>
+  <Comment CommentText="JokeCreatorResult returns the JokeApplication.  And has the NewJoke too - for both Create and Edit a joke">
+    <Position X="5.521" Y="2.552" Height="0.802" Width="1.721" />
   </Comment>
   <Class Name="SolidJokes.Web.Controllers.JokeController" Collapsed="true">
-    <Position X="2.25" Y="2.5" Width="1.5" />
-    <TypeIdentifier />
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="SolidJokes.Core.Services.JokeViewer" Collapsed="true">
-    <Position X="6.25" Y="4" Width="1.5" />
+    <Position X="1" Y="2.5" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SolidJokes.Web.SolidJokesControllerFactory" Collapsed="true">
-    <Position X="2" Y="1.5" Width="1.5" />
+    <Position X="1" Y="1.5" Width="2.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="SolidJokes.Core.DB.Session" Collapsed="true">
-    <Position X="2.25" Y="5.5" Width="1.5" />
+    <Position X="2.25" Y="6" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SolidJokes.Core.Models.Joke" Collapsed="true">
-    <Position X="4.25" Y="5.5" Width="1.5" />
+    <Position X="4.25" Y="6" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="SolidJokes.Core.Models.JokeApplication" Collapsed="true">
-    <Position X="4.75" Y="2.5" Width="1.5" />
+    <Position X="3.5" Y="3.5" Width="1.5" />
     <TypeIdentifier />
+  </Class>
+  <Class Name="SolidJokes.Core.Services.JokeCreatorResult">
+    <Position X="5.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SolidJokes.Core.Services.JokeCreator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Enum Name="SolidJokes.Core.Models.JokeApplicationStatus" Collapsed="true">
     <Position X="5.75" Y="0.75" Width="2" />

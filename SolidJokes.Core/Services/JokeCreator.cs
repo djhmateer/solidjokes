@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SolidJokes.Core.DB;
+﻿using SolidJokes.Core.DB;
 using SolidJokes.Core.Models;
+using System;
+using System.Linq;
 
 namespace SolidJokes.Core.Services {
     public class JokeCreatorResult {
@@ -15,63 +12,66 @@ namespace SolidJokes.Core.Services {
         }
     }
 
-    public interface IJokeCreator
-    {
+    public interface IJokeCreator {
         JokeCreatorResult InvalidApplication(string reason);
         JokeCreatorResult CreateOrEditJoke(JokeApplication app);
+        Joke GetJokeByID(int id);
     }
 
-    public class JokeCreator : IJokeCreator
-    {
+    public class JokeCreator : IJokeCreator {
         private readonly ISession session;
-        JokeApplication CurrentApplication;
+        JokeApplication currentJokeApplication;
 
         public JokeCreator(ISession session) {
             this.session = session;
         }
 
+        public Joke GetJokeByID(int id) {
+            return session.Jokes.SingleOrDefault(x => x.ID == id);
+        }
+
         bool TitleNotPresent() {
-            return String.IsNullOrWhiteSpace(CurrentApplication.Title);
+            return String.IsNullOrWhiteSpace(currentJokeApplication.Title);
         }
 
         bool TitleIsInvalid() {
-            return CurrentApplication.Title.Length < 4;
+            return currentJokeApplication.Title.Length < 4;
         }
 
         private bool TitleAlreadyExists() {
             bool exists = session.Jokes.FirstOrDefault(
-                    s => s.Title == CurrentApplication.Title
-                    && s.ID != CurrentApplication.JokeID) != null;
+                    s => s.Title == currentJokeApplication.Title
+                    && s.ID != currentJokeApplication.JokeID) != null;
             return exists;
         }
 
         public JokeCreatorResult InvalidApplication(string reason) {
             var result = new JokeCreatorResult();
-            CurrentApplication.Status = JokeApplicationStatus.Invalid;
-            result.JokeApplication = CurrentApplication;
+            currentJokeApplication.Status = JokeApplicationStatus.Invalid;
+            result.JokeApplication = currentJokeApplication;
             result.JokeApplication.Message = reason;
             return result;
         }
 
         // Part 2
         private Joke AcceptApplication() {
-            bool isEdit = CurrentApplication.JokeID != 0;
+            bool isEdit = currentJokeApplication.JokeID != 0;
             var story = new Joke();
-            CurrentApplication.Status = JokeApplicationStatus.Accepted;
+            currentJokeApplication.Status = JokeApplicationStatus.Accepted;
 
             if (isEdit) {
                 // Get existing Story
-                story = session.Jokes.Find(CurrentApplication.JokeID);
+                story = session.Jokes.Find(currentJokeApplication.JokeID);
             }
 
-            story.Title = CurrentApplication.Title;
-            story.Content = CurrentApplication.Content;
-            story.Rating = CurrentApplication.Rating;
+            story.Title = currentJokeApplication.Title;
+            story.Content = currentJokeApplication.Content;
+            story.Rating = currentJokeApplication.Rating;
             // If CreatedAt is set then use it, else now
-            story.CreatedAt = CurrentApplication.CreatedAt ?? DateTime.Now;
-            story.JokeType = CurrentApplication.JokeType;
-            story.VideoURL = CurrentApplication.VideoURL;
-            story.ImageURL = CurrentApplication.ImageURL;
+            story.CreatedAt = currentJokeApplication.CreatedAt ?? DateTime.Now;
+            story.JokeType = currentJokeApplication.JokeType;
+            story.VideoURL = currentJokeApplication.VideoURL;
+            story.ImageURL = currentJokeApplication.ImageURL;
 
             if (!isEdit) {
                 session.Jokes.Add(story);
@@ -86,7 +86,7 @@ namespace SolidJokes.Core.Services {
             bool isEdit = app.JokeID != 0;
             var result = new JokeCreatorResult();
 
-            CurrentApplication = app;
+            currentJokeApplication = app;
             result.JokeApplication = app;
             if (isEdit) {
                 result.JokeApplication.Message = "Successfully edited joke!";
