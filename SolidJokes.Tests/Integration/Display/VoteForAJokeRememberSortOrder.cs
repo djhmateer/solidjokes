@@ -7,7 +7,7 @@ using Xunit;
 
 namespace SolidJokes.Tests.Integration.Display {
     [Trait("Homepage", "User votes for a Joke and SortOrder is remembered")]
-    public class VoteForAJokeSortOrderRemembered : IntegrationTestBaseWithData {
+    public class VoteForAJokeRememberSortOrder : IntegrationTestBaseWithData {
 
         [Fact(DisplayName = "Default of ratingDescending sort order is remembered")]
         public void SortOrder() {

@@ -15,6 +15,9 @@
   <Comment CommentText="JokeCreatorResult returns the JokeApplication.  And has the NewJoke too - for both Create and Edit a joke">
     <Position X="5.521" Y="2.552" Height="0.802" Width="1.721" />
   </Comment>
+  <Comment CommentText="Integration Test - creates a new JokeApplication, calls JokeCreator.CreateOrEditJoke and receives back a JokeCreatorResult">
+    <Position X="8.521" Y="3.875" Height="0.802" Width="2.877" />
+  </Comment>
   <Class Name="SolidJokes.Web.Controllers.JokeController" Collapsed="true">
     <Position X="1" Y="2.5" Width="1.5" />
     <TypeIdentifier />
@@ -45,6 +48,13 @@
     <Position X="2.25" Y="4.75" Width="1.75" />
     <TypeIdentifier />
     <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SolidJokes.Tests.Integration.Creation.ValidJokeApplicationReceived" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAABEAEAAAAAEAAAAAAAAACAAAEAA=</HashCode>
+      <FileName>Integration\Creation\ValidJokeApplicationReceived.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Enum Name="SolidJokes.Core.Models.JokeApplicationStatus" Collapsed="true">
     <Position X="5.75" Y="0.75" Width="2" />
