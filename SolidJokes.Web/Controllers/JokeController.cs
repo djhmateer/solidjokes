@@ -7,7 +7,7 @@ namespace SolidJokes.Web.Controllers {
     public interface IJokeController {
     }
 
-    //[Authorize(Users = "Dave2")]
+    [Authorize(Users = "davemateer@gmail.com")]
     public class JokeController : Controller, IJokeController {
         private readonly IJokeViewer viewer;
         private readonly IJokeCreator creator;

@@ -8,6 +8,7 @@ namespace SolidJokes.Core.DB {
         int SaveChanges();
     }
 
+    // Account connection string is in Models/IdentityModel.cs
     public class Session : DbContext, ISession {
         public Session() : base(nameOrConnectionString: "SolidJokes") {
             // Nice for development - need migrations for this to work

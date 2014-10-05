@@ -33,6 +33,7 @@ namespace SolidJokes.Core.Services {
 
         public void DeleteJoke(int id) {
             var joke = session.Jokes.SingleOrDefault(x => x.ID == id);
+            // problem here is there are Votes then wont delete
             session.Jokes.Remove(joke);
             session.SaveChanges();
         }
