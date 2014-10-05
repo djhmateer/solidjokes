@@ -45,7 +45,7 @@ namespace SolidJokes.Core.Models {
             this.ImageURL = ImageURL;
             this.VideoURL = videoUrl;
 
-            // Caught by validations in web project, however if using a Console then this would throw
+            // Caught by dataannotation js validations in web project, however if using a Console then this would throw
             if (String.IsNullOrWhiteSpace(this.Title)
                || String.IsNullOrWhiteSpace(this.Content))
                 throw new InvalidOperationException("Can't have an empty Title or Content");

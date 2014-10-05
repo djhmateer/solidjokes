@@ -14,16 +14,18 @@ namespace SolidJokes.Web.Controllers {
     //[Authorize(Users = "Dave2")]
     public class JokeController : Controller, IJokeController {
         private readonly IJokeViewer viewer;
+        private readonly IJokeCreator creator;
 
-        public JokeController(IJokeViewer viewer) {
+        public JokeController(IJokeViewer viewer, IJokeCreator creator) {
             this.viewer = viewer;
+            this.creator = creator;
         }
 
         public ActionResult Index() {
             return View(viewer.ShowAllJokesByDateCreatedDescending());
         }
 
-       
+
 
         //public ActionResult Create() {
         //    return View();
@@ -35,7 +37,7 @@ namespace SolidJokes.Web.Controllers {
         //    if (ModelState.IsValid) {
         //        // Call our StoryCreator service
         //        var sc = new StoryCreator();
-        //        StoryCreatorResult result = sc.CreateOrEditStory(app);
+        //        StoryCreatorResult result = sc.CreateOrEditJoke(app);
         //        if (result.StoryApplication.IsValid()) {
         //            return RedirectToAction("Index");
         //        }
@@ -63,8 +65,7 @@ namespace SolidJokes.Web.Controllers {
                 return HttpNotFound();
             }
 
-            var app = new JokeApplication
-            {
+            var app = new JokeApplication {
                 JokeID = joke.ID,
                 Title = joke.Title,
                 Content = joke.Content,
@@ -74,23 +75,20 @@ namespace SolidJokes.Web.Controllers {
                 VideoURL = joke.VideoURL,
                 CreatedAt = joke.CreatedAt
             };
-
             return View(app);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(StoryApplication app) {
-        //    if (ModelState.IsValid) {
-        //        // Call our StoryCreator service
-        //        var sc = new StoryCreator();
-        //        StoryCreatorResult result = sc.CreateOrEditStory(app);
-        //        if (result.StoryApplication.IsValid()) {
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    return View(app);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(JokeApplication app) {
+            if (ModelState.IsValid) {
+                JokeCreatorResult result = creator.CreateOrEditJoke(app);
+                if (result.JokeApplication.IsValid()) {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(app);
+        }
 
         //// GET: /Story/Delete/5
         //public ActionResult Delete(int? id) {

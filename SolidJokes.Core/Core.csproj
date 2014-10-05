@@ -52,6 +52,7 @@
     <Compile Include="Models\JokeType.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\JokeCreator.cs" />
     <Compile Include="Services\JokeViewer.cs" />
     <Compile Include="Services\JokeViewerLogger.cs" />
     <Compile Include="Services\JokeVoter.cs" />
