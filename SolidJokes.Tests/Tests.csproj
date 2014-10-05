@@ -99,6 +99,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Diagrams\JokeCRUD.cd" />
     <None Include="Diagrams\JokeViewerSlice.cd" />
     <None Include="Diagrams\JokeVoterSlice.cd" />
     <None Include="packages.config" />

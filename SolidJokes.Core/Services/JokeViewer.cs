@@ -9,6 +9,7 @@ namespace SolidJokes.Core.Services {
         List<Joke> ShowAllJokesHighestRatingFirst();
         List<Joke> ShowAllJokesByDateCreatedDescending();
         Joke AddJoke(string title, int rating);
+        Joke GetJokeByID(int id);
     }
     public class JokeViewer : IJokeViewer {
         private readonly ISession session;
@@ -26,6 +27,10 @@ namespace SolidJokes.Core.Services {
             return session.Jokes
                     .OrderByDescending(s => s.CreatedAt)
                     .ToList();
+        }
+
+        public Joke GetJokeByID(int id) {
+            return session.Jokes.SingleOrDefault(x => x.ID == id);
         }
 
         // Should be in another object - JokeAdder?

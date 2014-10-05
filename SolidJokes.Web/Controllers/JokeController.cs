@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SolidJokes.Core.Models;
 using SolidJokes.Core.Services;
 
 namespace SolidJokes.Web.Controllers {
@@ -22,16 +23,7 @@ namespace SolidJokes.Web.Controllers {
             return View(viewer.ShowAllJokesByDateCreatedDescending());
         }
 
-        //public ActionResult Details(int? id) {
-        //    if (id == null) {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Story story = db.Stories.Find(id);
-        //    if (story == null) {
-        //        return HttpNotFound();
-        //    }
-        //    return View(story);
-        //}
+       
 
         //public ActionResult Create() {
         //    return View();
@@ -51,27 +43,38 @@ namespace SolidJokes.Web.Controllers {
         //    return View(app);
         //}
 
-        //// GET: /Story/Edit/5
-        //public ActionResult Edit(int? id) {
-        //    if (id == null) {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Story story = db.Stories.Find(id);
-        //    if (story == null) {
-        //        return HttpNotFound();
-        //    }
-        //    // Map to a StoryApplication
-        //    var app = new StoryApplication();
-        //    app.StoryID = story.ID;
-        //    app.Title = story.Title;
-        //    app.Content = story.Content;
-        //    app.Rating = story.Rating;
-        //    app.StoryType = story.StoryType;
-        //    app.ImageURL = story.ImageURL;
-        //    app.VideoURL = story.VideoURL;
+        public ActionResult Details(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var joke = viewer.GetJokeByID((int)id);
+            if (joke == null) {
+                return HttpNotFound();
+            }
+            return View(joke);
+        }
 
-        //    return View(app);
-        //}
+        public ActionResult Edit(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var joke = viewer.GetJokeByID((int)id);
+            if (joke == null) {
+                return HttpNotFound();
+            }
+
+            // Map to a StoryApplication
+            //var app = new StoryApplication();
+            //app.StoryID = story.ID;
+            //app.Title = story.Title;
+            //app.Content = story.Content;
+            //app.Rating = story.Rating;
+            //app.StoryType = story.StoryType;
+            //app.ImageURL = story.ImageURL;
+            //app.VideoURL = story.VideoURL;
+
+            return View(joke);
+        }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]

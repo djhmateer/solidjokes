@@ -22,6 +22,11 @@ namespace SolidJokes.Core.Services {
             return result;
         }
 
+        public Joke GetJokeByID(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<Joke> ShowAllJokesByDateCreatedDescending() {
             return jokeViewer.ShowAllJokesByDateCreatedDescending();
         }
