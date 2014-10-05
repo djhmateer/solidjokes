@@ -235,6 +235,7 @@
     <Content Include="Views\Joke\Index.cshtml" />
     <Content Include="Views\Joke\Edit.cshtml" />
     <Content Include="Views\Joke\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Joke\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

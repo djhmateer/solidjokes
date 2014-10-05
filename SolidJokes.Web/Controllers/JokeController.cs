@@ -27,23 +27,21 @@ namespace SolidJokes.Web.Controllers {
 
 
 
-        //public ActionResult Create() {
-        //    return View();
-        //}
+        public ActionResult Create() {
+            return View();
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(StoryApplication app) {
-        //    if (ModelState.IsValid) {
-        //        // Call our StoryCreator service
-        //        var sc = new StoryCreator();
-        //        StoryCreatorResult result = sc.CreateOrEditJoke(app);
-        //        if (result.StoryApplication.IsValid()) {
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    return View(app);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(JokeApplication app) {
+            if (ModelState.IsValid) {
+                JokeCreatorResult result = creator.CreateOrEditJoke(app);
+                if (result.JokeApplication.IsValid()) {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(app);
+        }
 
         //public ActionResult Details(int? id) {
         //    if (id == null) {
