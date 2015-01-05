@@ -49,5 +49,9 @@ namespace SolidJokes.Web.Controllers {
         public ActionResult About() {
             return View();
         }
+
+        public ActionResult Spotify() {
+            return View();
+        }
     }
 }
