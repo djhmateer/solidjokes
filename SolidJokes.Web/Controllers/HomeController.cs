@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Web;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SolidJokes.Core.Models;
 using SolidJokes.Core.Services;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace SolidJokes.Web.Controllers {
     public class HomeController : Controller, IHomeController {
@@ -52,6 +58,77 @@ namespace SolidJokes.Web.Controllers {
 
         public ActionResult Spotify() {
             return View();
+        }
+
+        public ActionResult SpotifyArtistSearch(){
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SpotifyArtistSearch(string artistName) {
+            string json = CallSpotifyAPI(artistName);
+
+            var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
+            ArtistsResponse result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
+
+            return View(result);
+        }
+
+        public ActionResult SpotifyAuthTestLogin() {
+            return View();
+        }
+
+        private static string CallSpotifyAPI(string artistName) {
+            if (!String.IsNullOrWhiteSpace(artistName)) artistName = HttpUtility.UrlEncode(artistName);
+
+            var url = String.Format("https://api.spotify.com/v1/search?q={0}&type=artist", artistName);
+
+            string text = null;
+            bool done = false;
+            while (!done) {
+                try {
+                    Console.WriteLine("Requesting: " + url);
+
+                    var request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.Accept = "application/json";
+
+                    var response = (HttpWebResponse)request.GetResponse();
+
+                    using (var sr = new StreamReader(response.GetResponseStream())) {
+                        text = sr.ReadToEnd();
+                    }
+
+                    done = true;
+                }
+                catch (WebException ex) {
+                    Console.WriteLine("Exception: " + ex.Message);
+                    Console.WriteLine("Retrying in 1 second...");
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
+
+            if (String.IsNullOrEmpty(text)) throw new InvalidOperationException();
+            return text;
+        }
+    }
+
+
+    public class ArtistsResponse {
+        public string Href { get; set; }
+        public int Total { get; set; }
+
+        public List<Artist> Items { get; set; }
+
+        public class Artist {
+            public string Id { get; set; }
+            public List<SpotifyImage> Images { get; set; }
+            public string Name { get; set; }
+
+            public class SpotifyImage {
+                public int Height { get; set; }
+                public string Url { get; set; }
+                public int Width { get; set; }
+            }
         }
     }
 }

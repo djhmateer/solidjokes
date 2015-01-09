@@ -243,6 +243,8 @@
     <Content Include="Views\Joke\Create.cshtml" />
     <Content Include="Views\Joke\Delete.cshtml" />
     <Content Include="Views\Home\Spotify.cshtml" />
+    <Content Include="Views\Home\SpotifyArtistSearch.cshtml" />
+    <Content Include="Views\Home\SpotifyAuthTestLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

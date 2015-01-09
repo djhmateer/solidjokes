@@ -1,0 +1,40 @@
+﻿@using Microsoft.Ajax.Utilities
+@model SolidJokes.Web.Controllers.ArtistsResponse
+
+<h2>Artist Search</h2>
+
+@using (Html.BeginForm()) {
+    @*<input type="text" id="artistName" />*@
+
+    @Html.TextBox("artistName")
+    <input type="submit" value="Search" />
+}
+
+@if (Model != null) {
+    <p>
+        Total records: @Model.Total
+    </p>
+    <p>
+        Href: @Model.Href
+    </p>
+
+    <table class="table">
+        @foreach (var item in Model.Items) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                @foreach (var image in item.Images) {
+                    if (image.Width == 200) {
+                        <td>
+                            <img src="@image.Url" />
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+}
+
+
