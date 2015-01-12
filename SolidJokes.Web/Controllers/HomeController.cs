@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Web;
@@ -61,11 +62,13 @@ namespace SolidJokes.Web.Controllers {
         }
 
         public ActionResult SpotifyArtistSearch(){
+            ViewBag.InitialArtist = "muse";
             return View();
         }
 
         [HttpPost]
         public ActionResult SpotifyArtistSearch(string artistName) {
+            ViewBag.InitialArtist = "";
             string json = CallSpotifyAPI(artistName);
 
             var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
@@ -74,22 +77,17 @@ namespace SolidJokes.Web.Controllers {
             return View(result);
         }
 
-        public ActionResult SpotifyAuthTestLogin() {
-            return View();
-        }
-
         private static string CallSpotifyAPI(string artistName) {
             if (!String.IsNullOrWhiteSpace(artistName)) artistName = HttpUtility.UrlEncode(artistName);
 
-            var url = String.Format("https://api.spotify.com/v1/search?q={0}&type=artist", artistName);
+            //https://api.spotify.com/v1/search?query=muse&offset=20&limit=20&type=artist
+            var url = String.Format("https://api.spotify.com/v1/search?q={0}&offset=0&limit=50&type=artist", artistName);
 
             string text = null;
             bool done = false;
             while (!done) {
                 try {
-                    Console.WriteLine("Requesting: " + url);
-
-                    var request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    var request = (HttpWebRequest)WebRequest.Create(url);
                     request.Accept = "application/json";
 
                     var response = (HttpWebResponse)request.GetResponse();
@@ -101,8 +99,7 @@ namespace SolidJokes.Web.Controllers {
                     done = true;
                 }
                 catch (WebException ex) {
-                    Console.WriteLine("Exception: " + ex.Message);
-                    Console.WriteLine("Retrying in 1 second...");
+                    Debug.WriteLine("Exception: " + ex.Message);
                     System.Threading.Thread.Sleep(1000);
                 }
             }
@@ -112,12 +109,13 @@ namespace SolidJokes.Web.Controllers {
         }
     }
 
-
     public class ArtistsResponse {
         public string Href { get; set; }
         public int Total { get; set; }
 
         public List<Artist> Items { get; set; }
+        public string Previous { get; set; }
+        public string Next { get; set; }
 
         public class Artist {
             public string Id { get; set; }

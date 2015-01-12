@@ -5,32 +5,39 @@
 
 @using (Html.BeginForm()) {
     @*<input type="text" id="artistName" />*@
-
-    @Html.TextBox("artistName")
+    @*@Html.TextBox("artistName")*@
+    <input id="artistName" name="artistName" type="text" value="@ViewBag.InitialArtist" />
     <input type="submit" value="Search" />
 }
 
 @if (Model != null) {
     <p>
-        Total records: @Model.Total
+        Showing first 50 records of: @Model.Total
     </p>
     <p>
         Href: @Model.Href
+    </p>
+    <p>
+    @*    <a href="@Model.Next">Next</a>*@
+        @*<a href="@Model.Previous">Previous</a>*@
     </p>
 
     <table class="table">
         @foreach (var item in Model.Items) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @item.Name
                 </td>
-
-                @foreach (var image in item.Images) {
-                    if (image.Width == 200) {
-                        <td>
-                            <img src="@image.Url" />
-                        </td>
-                    }
+                @if (item.Images.Count == 4) {
+                    <td>
+                        <img src="@item.Images[2].Url" />
+                    </td>
+                }
+                
+                @if (item.Images.Count == 3) {
+                    <td>
+                        <img width="200" src="@item.Images[1].Url" />
+                    </td>
                 }
             </tr>
         }
