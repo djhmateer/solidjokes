@@ -1,25 +1,30 @@
-﻿@using Microsoft.Ajax.Utilities
-@model SolidJokes.Web.Controllers.ArtistsResponse
+﻿@model SolidJokes.Web.Controllers.ArtistsResponse
 
 <h2>Artist Search</h2>
 
-@using (Html.BeginForm()) {
-    @*<input type="text" id="artistName" />*@
-    @*@Html.TextBox("artistName")*@
-    <input id="artistName" name="artistName" type="text" value="@ViewBag.InitialArtist" />
+<form action="/Home/SpotifyArtistSearch">
+    <input id="artist" name="artist" type="text" value="@ViewBag.InitialArtist" />
+    <input type=hidden name=offset value=0>
     <input type="submit" value="Search" />
-}
+</form>
 
 @if (Model != null) {
     <p>
-        Showing first 50 records of: @Model.Total
+        Total: @Model.Total
     </p>
     <p>
         Href: @Model.Href
     </p>
     <p>
-    @*    <a href="@Model.Next">Next</a>*@
-        @*<a href="@Model.Previous">Previous</a>*@
+        API Call: @ViewBag.APITime ms
+    </p>
+    <p>
+        @if (ViewBag.ShowPrevious == true){
+            <a href="/Home/SpotifyArtistSearch?artist=@ViewBag.ArtistSearchedFor&offset=@ViewBag.OffsetPrevious">Previous</a>
+        }
+        @if (ViewBag.ShowNext == true){
+            <a href="/Home/SpotifyArtistSearch?artist=@ViewBag.ArtistSearchedFor&offset=@ViewBag.OffsetNext">Next</a>
+        }
     </p>
 
     <table class="table">
@@ -33,7 +38,7 @@
                         <img src="@item.Images[2].Url" />
                     </td>
                 }
-                
+
                 @if (item.Images.Count == 3) {
                     <td>
                         <img width="200" src="@item.Images[1].Url" />

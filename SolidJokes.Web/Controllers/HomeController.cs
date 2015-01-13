@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -57,31 +58,51 @@ namespace SolidJokes.Web.Controllers {
             return View();
         }
 
-        public ActionResult Spotify() {
-            return View();
-        }
+        public ActionResult SpotifyArtistSearch(string artist = "", int offset = 0) {
+            // First call with no parameters
+            if (artist == ""){
+                ViewBag.InitialArtist = "muse";
+                return View();
+            }
 
-        public ActionResult SpotifyArtistSearch(){
-            ViewBag.InitialArtist = "muse";
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult SpotifyArtistSearch(string artistName) {
-            ViewBag.InitialArtist = "";
-            string json = CallSpotifyAPI(artistName);
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            string json = CallSpotifyAPI(artist, offset);
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:0}",ts.TotalMilliseconds);
+            ViewBag.APITime = elapsedTime;
 
             var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
             ArtistsResponse result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
 
+            ViewBag.ArtistSearchedFor = artist;
+
+            ViewBag.ShowPrevious = false;
+            if (offset >= 50){
+                ViewBag.OffsetPrevious = offset - 50;
+                ViewBag.ShowPrevious = true;
+            }
+
+            ViewBag.ShowNext = false;
+            if (offset + 50 < result.Total){
+                ViewBag.OffsetNext = offset + 50;
+                ViewBag.ShowNext = true;
+            }
+
             return View(result);
         }
 
-        private static string CallSpotifyAPI(string artistName) {
-            if (!String.IsNullOrWhiteSpace(artistName)) artistName = HttpUtility.UrlEncode(artistName);
+        public ActionResult Spotify() {
+            return View();
+        }
+
+        private static string CallSpotifyAPI(string artist, int offset) {
+            if (!String.IsNullOrWhiteSpace(artist)) artist = HttpUtility.UrlEncode(artist);
 
             //https://api.spotify.com/v1/search?query=muse&offset=20&limit=20&type=artist
-            var url = String.Format("https://api.spotify.com/v1/search?q={0}&offset=0&limit=50&type=artist", artistName);
+            var url = String.Format("https://api.spotify.com/v1/search?q={0}&offset={1}&limit=50&type=artist", 
+                artist, offset);
 
             string text = null;
             bool done = false;
