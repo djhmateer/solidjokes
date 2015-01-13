@@ -1,6 +1,13 @@
 ﻿@model SolidJokes.Web.Controllers.ArtistsResponse
 
-<h2>Artist Search</h2>
+@if (String.IsNullOrEmpty(@Request["artist"])) {
+    <h2>Artist Search</h2>
+}
+else {
+    <h2>Artist: @Request["artist"]</h2>
+}
+
+     
 
 <form action="/Home/SpotifyArtistSearch">
     <input id="artist" name="artist" type="text" value="@ViewBag.InitialArtist" />
