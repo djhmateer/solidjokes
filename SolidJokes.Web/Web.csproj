@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IHomeController.cs" />
     <Compile Include="Controllers\JokeController.cs" />
@@ -245,6 +246,7 @@
     <Content Include="Views\Home\Spotify.cshtml" />
     <Content Include="Views\Home\SpotifyArtistSearch.cshtml" />
     <Content Include="Views\Home\SpotifyAuthTestLogin.cshtml" />
+    <Content Include="Views\Artist\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

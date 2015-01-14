@@ -1,14 +1,14 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using System.Threading;
-using System.Web;
+﻿using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SolidJokes.Core.Models;
 using SolidJokes.Core.Services;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace SolidJokes.Web.Controllers {
@@ -64,14 +64,11 @@ namespace SolidJokes.Web.Controllers {
                 ViewBag.InitialArtist = "muse";
                 return View();
             }
-
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            string json = CallSpotifyAPI(artist, offset);
-            stopWatch.Stop();
-            TimeSpan ts = stopWatch.Elapsed;
-            string elapsedTime = String.Format("{0:0}",ts.TotalMilliseconds);
-            ViewBag.APITime = elapsedTime;
+           
+            var spotifyHelper = new SpotifyHelper();
+            var stopWatchResult = new StopWatchResult();
+            string json = spotifyHelper.CallSpotifyAPI(artist, offset, stopWatchResult);
+            ViewBag.APITime = stopWatchResult.TimeInMs;
 
             var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
             ArtistsResponse result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
@@ -96,12 +93,20 @@ namespace SolidJokes.Web.Controllers {
         public ActionResult Spotify() {
             return View();
         }
+    }
 
-        private static string CallSpotifyAPI(string artist, int offset) {
+    public class StopWatchResult{
+        public string TimeInMs { get; set; }
+    }
+    public class SpotifyHelper{
+        public string CallSpotifyAPI(string artist, int offset, StopWatchResult stopWatchResult) {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             if (!String.IsNullOrWhiteSpace(artist)) artist = HttpUtility.UrlEncode(artist);
 
-            //https://api.spotify.com/v1/search?query=muse&offset=20&limit=20&type=artist
-            var url = String.Format("https://api.spotify.com/v1/search?q={0}&offset={1}&limit=50&type=artist", 
+            //https://api.spotify.com/v1/artists/12Chz98pHFMPJEknJQMWvI
+            var url = String.Format("https://api.spotify.com/v1/search?q={0}&offset={1}&limit=50&type=artist",
                 artist, offset);
 
             string text = null;
@@ -121,27 +126,45 @@ namespace SolidJokes.Web.Controllers {
                 }
                 catch (WebException ex) {
                     Debug.WriteLine("Exception: " + ex.Message);
-                    System.Threading.Thread.Sleep(1000);
+                    Thread.Sleep(1000);
                 }
             }
 
             if (String.IsNullOrEmpty(text)) throw new InvalidOperationException();
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:0}", ts.TotalMilliseconds);
+            stopWatchResult.TimeInMs = elapsedTime;
             return text;
         }
     }
 
     public class ArtistsResponse {
+        // Overall Href of the query
         public string Href { get; set; }
+        public List<Artist> Items { get; set; }
+        public string Next { get; set; }
+        public int Offset { get; set; }
+        public string Previous { get; set; }
         public int Total { get; set; }
 
-        public List<Artist> Items { get; set; }
-        public string Previous { get; set; }
-        public string Next { get; set; }
-
         public class Artist {
+            public SpotifyURL External_urls { get; set; }
+            public class SpotifyURL {
+                public string Spotify { get; set; }
+            }
+
+            // blank very often
+            //public List<Genre> Genres { get; set; }
+          
+            // API call for details of the artist
+            public string Href { get; set; }
             public string Id { get; set; }
             public List<SpotifyImage> Images { get; set; }
             public string Name { get; set; }
+            public int Popularity { get; set; }
+            public string Type { get; set; }
+            public string Uri { get; set; }
 
             public class SpotifyImage {
                 public int Height { get; set; }

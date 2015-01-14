@@ -7,7 +7,7 @@ else {
     <h2>Artist: @Request["artist"]</h2>
 }
 
-     
+
 
 <form action="/Home/SpotifyArtistSearch">
     <input id="artist" name="artist" type="text" value="@ViewBag.InitialArtist" />
@@ -26,10 +26,10 @@ else {
         API Call: @ViewBag.APITime ms
     </p>
     <p>
-        @if (ViewBag.ShowPrevious == true){
+        @if (ViewBag.ShowPrevious == true) {
             <a href="/Home/SpotifyArtistSearch?artist=@ViewBag.ArtistSearchedFor&offset=@ViewBag.OffsetPrevious">Previous</a>
         }
-        @if (ViewBag.ShowNext == true){
+        @if (ViewBag.ShowNext == true) {
             <a href="/Home/SpotifyArtistSearch?artist=@ViewBag.ArtistSearchedFor&offset=@ViewBag.OffsetNext">Next</a>
         }
     </p>
@@ -38,7 +38,18 @@ else {
         @foreach (var item in Model.Items) {
             <tr>
                 <td>
+                    @*<a href="/Artist/Details/@item.Id">@item.Name</a>*@
                     @item.Name
+                    <br />
+                    <a href="@item.External_urls.Spotify">Open in Web Spotify</a>
+                    <br />
+                    @*<a href="@item.Href">Href</a>*@
+                    Popularity: @item.Popularity
+                    @*<br />*@
+                    @*Type: @item.Type*@
+                    <br />
+                    <a href="@item.Uri">Open directly</a>
+
                 </td>
                 @if (item.Images.Count == 4) {
                     <td>
