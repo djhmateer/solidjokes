@@ -4,5 +4,37 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details - @Model.Id</h2>
+<h2>Details - @Model.Name</h2>
+<p>API time: @ViewBag.APITime ms</p>
+<p>API Call: @Model.Href</p>
 
+<p><a href="@Model.external_urls.Spotify">Open web</a> </p>
+<p><a href="@Model.Uri">Open direct</a></p>
+<p>Followers Total: @Model.followers.Total</p>
+<p>Popularity: @Model.Popularity</p>
+
+<img src="@Model.Images[0].URL" />
+
+
+@*<tr>
+
+        @if (@Model.Images.Count == 4) {
+            <td>
+                <img src="@Model.Images[2].URL" />
+            </td>
+        }
+
+        @if (@Model.Images.Count == 3) {
+            <td>
+                <img width="200" src="@Model.Images[1].URL" />
+            </td>
+        }
+    </tr>*@
+
+@*@foreach (var item in Model.Images) {
+        <tr>
+            <td>
+                <img src="@item.URL" />
+            </td>
+        </tr>
+    }*@

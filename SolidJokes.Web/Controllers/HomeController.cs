@@ -41,7 +41,8 @@ namespace SolidJokes.Web.Controllers {
             if (message != null) {
                 if (message.Contains("Thank you for voting!") && message != "") {
                     ViewBag.GreenMessage = true;
-                } else {
+                }
+                else {
                     ViewBag.RedMessage = true;
                 }
                 ViewBag.Message = message;
@@ -60,14 +61,14 @@ namespace SolidJokes.Web.Controllers {
 
         public ActionResult SpotifyArtistSearch(string artist = "", int offset = 0) {
             // First call with no parameters
-            if (artist == ""){
+            if (artist == "") {
                 ViewBag.InitialArtist = "muse";
                 return View();
             }
-           
+
             var spotifyHelper = new SpotifyHelper();
             var stopWatchResult = new StopWatchResult();
-            string json = spotifyHelper.CallSpotifyAPI(artist, offset, stopWatchResult);
+            string json = spotifyHelper.CallSpotifyAPISearch(artist, offset, stopWatchResult);
             ViewBag.APITime = stopWatchResult.TimeInMs;
 
             var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
@@ -76,13 +77,13 @@ namespace SolidJokes.Web.Controllers {
             ViewBag.ArtistSearchedFor = artist;
 
             ViewBag.ShowPrevious = false;
-            if (offset >= 50){
+            if (offset >= 50) {
                 ViewBag.OffsetPrevious = offset - 50;
                 ViewBag.ShowPrevious = true;
             }
 
             ViewBag.ShowNext = false;
-            if (offset + 50 < result.Total){
+            if (offset + 50 < result.Total) {
                 ViewBag.OffsetNext = offset + 50;
                 ViewBag.ShowNext = true;
             }
@@ -95,20 +96,25 @@ namespace SolidJokes.Web.Controllers {
         }
     }
 
-    public class StopWatchResult{
+    public class StopWatchResult {
         public string TimeInMs { get; set; }
     }
-    public class SpotifyHelper{
-        public string CallSpotifyAPI(string artist, int offset, StopWatchResult stopWatchResult) {
+    public class SpotifyHelper {
+        public string CallSpotifyAPIArtist(string artistCode, StopWatchResult stopWatchResult) {
+            var url = String.Format("https://api.spotify.com/v1/artists/{0}", artistCode);
+            var text = CallAPI(stopWatchResult, url);
+            return text;
+        }
+        public string CallSpotifyAPISearch(string artistName, int offset, StopWatchResult stopWatchResult) {
+            if (!String.IsNullOrWhiteSpace(artistName)) artistName = HttpUtility.UrlEncode(artistName);
+            var url = String.Format("https://api.spotify.com/v1/search?q={0}&offset={1}&limit=50&type=artist", artistName, offset);
+            var text = CallAPI(stopWatchResult, url);
+            return text;
+        }
+
+        private static string CallAPI(StopWatchResult stopWatchResult, string url) {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-
-            if (!String.IsNullOrWhiteSpace(artist)) artist = HttpUtility.UrlEncode(artist);
-
-            //https://api.spotify.com/v1/artists/12Chz98pHFMPJEknJQMWvI
-            var url = String.Format("https://api.spotify.com/v1/search?q={0}&offset={1}&limit=50&type=artist",
-                artist, offset);
-
             string text = null;
             bool done = false;
             while (!done) {
@@ -156,8 +162,8 @@ namespace SolidJokes.Web.Controllers {
 
             // blank very often
             //public List<Genre> Genres { get; set; }
-          
-            // API call for details of the artist
+
+            // API call for details of the artistName
             public string Href { get; set; }
             public string Id { get; set; }
             public List<SpotifyImage> Images { get; set; }

@@ -7,8 +7,6 @@ else {
     <h2>Artist: @Request["artist"]</h2>
 }
 
-
-
 <form action="/Home/SpotifyArtistSearch">
     <input id="artist" name="artist" type="text" value="@ViewBag.InitialArtist" />
     <input type=hidden name=offset value=0>
@@ -38,28 +36,28 @@ else {
         @foreach (var item in Model.Items) {
             <tr>
                 <td>
-                    @*<a href="/Artist/Details/@item.Id">@item.Name</a>*@
-                    @item.Name
+                    <a href="/Artist/Details/@item.Id">@item.Name</a>
                     <br />
                     <a href="@item.External_urls.Spotify">Open in Web Spotify</a>
                     <br />
-                    @*<a href="@item.Href">Href</a>*@
                     Popularity: @item.Popularity
-                    @*<br />*@
-                    @*Type: @item.Type*@
                     <br />
                     <a href="@item.Uri">Open directly</a>
 
                 </td>
                 @if (item.Images.Count == 4) {
                     <td>
-                        <img src="@item.Images[2].Url" />
+                        <a href="/Artist/Details/@item.Id">
+                            <img src="@item.Images[2].Url" />
+                        </a>
                     </td>
                 }
 
                 @if (item.Images.Count == 3) {
                     <td>
-                        <img width="200" src="@item.Images[1].Url" />
+                        <a href="/Artist/Details/@item.Id">
+                            <img width="200" src="@item.Images[1].Url" />
+                        </a>
                     </td>
                 }
             </tr>
