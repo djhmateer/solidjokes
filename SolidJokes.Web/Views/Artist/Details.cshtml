@@ -4,7 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details - @Model.Name</h2>
+<h2>@Model.Name</h2>
+<p>
+    @if (@ViewBag.Id == "Random") {
+        <a href="/Artist/Details/Random">Another Random Artist!</a>
+    }
+</p>
 <p>API time: @ViewBag.APITime ms</p>
 <p>API Call: @Model.Href</p>
 
@@ -13,28 +18,6 @@
 <p>Followers Total: @Model.followers.Total</p>
 <p>Popularity: @Model.Popularity</p>
 
-<img src="@Model.Images[0].URL" />
-
-
-@*<tr>
-
-        @if (@Model.Images.Count == 4) {
-            <td>
-                <img src="@Model.Images[2].URL" />
-            </td>
-        }
-
-        @if (@Model.Images.Count == 3) {
-            <td>
-                <img width="200" src="@Model.Images[1].URL" />
-            </td>
-        }
-    </tr>*@
-
-@*@foreach (var item in Model.Images) {
-        <tr>
-            <td>
-                <img src="@item.URL" />
-            </td>
-        </tr>
-    }*@
+@if (@Model.Images.Count > 0) {
+    <img src="@Model.Images[0].URL" />
+}

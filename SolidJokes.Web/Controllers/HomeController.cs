@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Text;
+using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SolidJokes.Core.Models;
@@ -100,10 +101,34 @@ namespace SolidJokes.Web.Controllers {
         public string TimeInMs { get; set; }
     }
     public class SpotifyHelper {
-        public string CallSpotifyAPIArtist(string artistCode, StopWatchResult stopWatchResult) {
-            var url = String.Format("https://api.spotify.com/v1/artists/{0}", artistCode);
-            var text = CallAPI(stopWatchResult, url);
-            return text;
+        public string CallSpotifyAPIArtist(string artistCode, StopWatchResult stopWatchResult){
+            string url;
+            string json;
+            if (artistCode == "Random"){
+                // %3A is :
+                url = "https://api.spotify.com/v1/search?q=year:0000-9999&type=artist&market=GB";
+                json = CallAPI(stopWatchResult, url);
+                var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
+                var result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
+
+                var total = result.Total;
+                var random = new Random();
+                //int offset = random.Next(1, total);
+                int offset = random.Next(1, 100000);
+
+
+                //url = "https://api.spotify.com/v1/search?q=year%3A2001&type=artist&market=US&limit=1&offset=12345";
+                url = "https://api.spotify.com/v1/search?q=year:0000-9999&type=artist&market=GB&limit=1&offset=" + offset;
+                json = CallAPI(stopWatchResult, url);
+                jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
+                result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
+
+                artistCode = result.Items[0].Id;
+                // now we want to get the detail!
+            }
+            url = String.Format("https://api.spotify.com/v1/artists/{0}", artistCode);
+            json = CallAPI(stopWatchResult, url);
+            return json;
         }
         public string CallSpotifyAPISearch(string artistName, int offset, StopWatchResult stopWatchResult) {
             if (!String.IsNullOrWhiteSpace(artistName)) artistName = HttpUtility.UrlEncode(artistName);
@@ -132,7 +157,7 @@ namespace SolidJokes.Web.Controllers {
                 }
                 catch (WebException ex) {
                     Debug.WriteLine("Exception: " + ex.Message);
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
             }
 

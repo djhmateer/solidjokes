@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -11,8 +13,10 @@ namespace SolidJokes.Web.Controllers
         public ActionResult Details(string id){
             var spotifyHelper = new SpotifyHelper();
             var stopWatchResult = new StopWatchResult();
-            string json = spotifyHelper.CallSpotifyAPIArtist(stopWatchResult: stopWatchResult, artistCode: id);
+            string json = spotifyHelper.CallSpotifyAPIArtist(stopWatchResult: stopWatchResult,
+                artistCode: id);
             ViewBag.APITime = stopWatchResult.TimeInMs;
+            ViewBag.Id = id;
             var result = JsonConvert.DeserializeObject<ArtistDetails>(json);
 
             return View(result);
