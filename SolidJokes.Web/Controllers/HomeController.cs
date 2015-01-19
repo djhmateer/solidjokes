@@ -99,42 +99,40 @@ namespace SolidJokes.Web.Controllers {
 
     public class StopWatchResult {
         public string TimeInMs { get; set; }
+        public TimeSpan ElapsedTime { get; set; }
     }
     public class SpotifyHelper {
-        public string CallSpotifyAPIArtist(string artistCode, StopWatchResult stopWatchResult){
-            string url;
-            string json;
-            if (artistCode == "Random"){
-                // %3A is :
-                url = "https://api.spotify.com/v1/search?q=year:0000-9999&type=artist&market=GB";
-                json = CallAPI(stopWatchResult, url);
-                var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
-                var result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
-
-                var total = result.Total;
-                var random = new Random();
-                //int offset = random.Next(1, total);
-                int offset = random.Next(1, 100000);
-
-
-                //url = "https://api.spotify.com/v1/search?q=year%3A2001&type=artist&market=US&limit=1&offset=12345";
-                url = "https://api.spotify.com/v1/search?q=year:0000-9999&type=artist&market=GB&limit=1&offset=" + offset;
-                json = CallAPI(stopWatchResult, url);
-                jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
-                result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
-
-                artistCode = result.Items[0].Id;
-                // now we want to get the detail!
-            }
-            url = String.Format("https://api.spotify.com/v1/artists/{0}", artistCode);
-            json = CallAPI(stopWatchResult, url);
-            return json;
-        }
         public string CallSpotifyAPISearch(string artistName, int offset, StopWatchResult stopWatchResult) {
             if (!String.IsNullOrWhiteSpace(artistName)) artistName = HttpUtility.UrlEncode(artistName);
             var url = String.Format("https://api.spotify.com/v1/search?q={0}&offset={1}&limit=50&type=artist", artistName, offset);
             var text = CallAPI(stopWatchResult, url);
             return text;
+        }
+
+        public string CallSpotifyAPIArtist(string artistCode, StopWatchResult stopWatchResult){
+            string url;
+            string json;
+            if (artistCode == "Random"){
+                // %3A is :
+                //url = "https://api.spotify.com/v1/search?q=year:0000-9999&type=artist&market=GB";
+                var random = new Random();
+                int offset = random.Next(1, 100000);
+                url = "https://api.spotify.com/v1/search?q=year:0000-9999&type=artist&market=GB&limit=1&offset=" + offset;
+                json = CallAPI(stopWatchResult, url);
+                var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
+                var result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
+
+                artistCode = result.Items[0].Id;
+            }
+            url = String.Format("https://api.spotify.com/v1/artists/{0}", artistCode);
+            json = CallAPI(stopWatchResult, url);
+            return json;
+        }
+
+        public string CallSpotifyAPIArtistTopTracks(StopWatchResult stopWatchResult, string artistCode) {
+            var url = String.Format("https://api.spotify.com/v1/artists/{0}/top-tracks?country=GB", artistCode);
+            var json = CallAPI(stopWatchResult, url);
+            return json;
         }
 
         private static string CallAPI(StopWatchResult stopWatchResult, string url) {
@@ -164,10 +162,13 @@ namespace SolidJokes.Web.Controllers {
             if (String.IsNullOrEmpty(text)) throw new InvalidOperationException();
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
-            string elapsedTime = String.Format("{0:0}", ts.TotalMilliseconds);
-            stopWatchResult.TimeInMs = elapsedTime;
+            stopWatchResult.ElapsedTime = ts;
+            string totalMilliseconds = String.Format("{0:0}", ts.TotalMilliseconds);
+            stopWatchResult.TimeInMs = totalMilliseconds;
             return text;
         }
+
+        
     }
 
     public class ArtistsResponse {
