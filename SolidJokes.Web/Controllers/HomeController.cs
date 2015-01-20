@@ -109,30 +109,19 @@ namespace SolidJokes.Web.Controllers {
             return text;
         }
 
-        public string CallSpotifyAPIArtist(string artistCode, StopWatchResult stopWatchResult){
-            string url;
-            string json;
-            if (artistCode == "Random"){
-                // %3A is :
-                //url = "https://api.spotify.com/v1/search?q=year:0000-9999&type=artist&market=GB";
-                var random = new Random();
-                int offset = random.Next(1, 100000);
-                url = "https://api.spotify.com/v1/search?q=year:0000-9999&type=artist&market=GB&limit=1&offset=" + offset;
-                json = CallAPI(stopWatchResult, url);
-                var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
-                var result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
-
-                artistCode = result.Items[0].Id;
-            }
-            url = String.Format("https://api.spotify.com/v1/artists/{0}", artistCode);
-            json = CallAPI(stopWatchResult, url);
+        public string CallSpotifyAPIArtist(string artistCode, StopWatchResult stopWatchResult) {
+            var url = String.Format("https://api.spotify.com/v1/artists/{0}", artistCode);
+            var json = CallAPI(stopWatchResult, url);
             return json;
         }
 
-        public string CallSpotifyAPIArtistTopTracks(StopWatchResult stopWatchResult, string artistCode) {
+        public APIResult CallSpotifyAPIArtistTopTracks(StopWatchResult stopWatchResult, string artistCode) {
             var url = String.Format("https://api.spotify.com/v1/artists/{0}/top-tracks?country=GB", artistCode);
             var json = CallAPI(stopWatchResult, url);
-            return json;
+            return new APIResult {
+                Json = json,
+                Url = url
+            };
         }
 
         private static string CallAPI(StopWatchResult stopWatchResult, string url) {
@@ -167,8 +156,11 @@ namespace SolidJokes.Web.Controllers {
             stopWatchResult.TimeInMs = totalMilliseconds;
             return text;
         }
+    }
 
-        
+    public class APIResult {
+        public string Json { get; set; }
+        public string Url { get; set; }
     }
 
     public class ArtistsResponse {

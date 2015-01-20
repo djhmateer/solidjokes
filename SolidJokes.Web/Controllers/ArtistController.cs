@@ -8,7 +8,6 @@ using Newtonsoft.Json.Linq;
 
 namespace SolidJokes.Web.Controllers {
     public class ArtistController : Controller {
-        // GET: Artist/Details/12345
         public ActionResult Details(string id){
             var spotifyHelper = new SpotifyHelper();
             var stopWatchResult = new StopWatchResult();
@@ -24,12 +23,11 @@ namespace SolidJokes.Web.Controllers {
             };
             apiDebugList.Add(apiDebug);
 
-            json = spotifyHelper.CallSpotifyAPIArtistTopTracks(stopWatchResult: stopWatchResult,
-                artistCode: id);
-            var artistTopTracks = JsonConvert.DeserializeObject<ArtistTopTracks>(json);
+            var apiResult = spotifyHelper.CallSpotifyAPIArtistTopTracks(stopWatchResult, id);
+            var artistTopTracks = JsonConvert.DeserializeObject<ArtistTopTracks>(apiResult.Json);
             apiDebug = new APIDebug {
                 APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
-                APIURL = ""
+                APIURL = apiResult.Url
             };
             apiDebugList.Add(apiDebug);
 
