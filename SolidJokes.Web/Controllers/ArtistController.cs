@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SolidJokes.Web.Controllers {
     public class ArtistController : Controller {
-        public ActionResult Details(string id){
+        public ActionResult Details(string id) {
             var spotifyHelper = new SpotifyHelper();
             var stopWatchResult = new StopWatchResult();
             string json = spotifyHelper.CallSpotifyAPIArtist(stopWatchResult: stopWatchResult,
@@ -17,7 +17,7 @@ namespace SolidJokes.Web.Controllers {
             var artistDetails = JsonConvert.DeserializeObject<ArtistDetails>(json);
 
             var apiDebugList = new List<APIDebug>();
-            var apiDebug = new APIDebug{
+            var apiDebug = new APIDebug {
                 APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
                 APIURL = artistDetails.Href
             };
@@ -35,14 +35,61 @@ namespace SolidJokes.Web.Controllers {
             var tracks = artistTopTracks.tracks;
             var top5 = tracks.OrderByDescending(x => x.popularity).Take(5);
             artistTopTracks.tracks = top5.ToList();
-            var vm = new ArtistDetailsViewModel{
+
+
+            // All Artists albums
+            apiResult = spotifyHelper.CallSpotifyAPIArtistAlbums(stopWatchResult, id);
+            var artistAlbums = JsonConvert.DeserializeObject<ArtistAlbums>(apiResult.Json);
+            apiDebug = new APIDebug {
+                APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
+                APIURL = apiResult.Url
+            };
+            apiDebugList.Add(apiDebug);
+
+            // Are there more albums
+
+            var vm = new ArtistDetailsViewModel {
+                APIDebugList = apiDebugList,
                 ArtistDetails = artistDetails,
                 ArtistTopTracks = artistTopTracks,
-                APIDebugList = apiDebugList
+                ArtistAlbums = artistAlbums
             };
             return View(vm);
         }
     }
+
+    public class ArtistAlbums {
+        public class ExternalUrls {
+            public string spotify { get; set; }
+        }
+
+        public class Image {
+            public int height { get; set; }
+            public string url { get; set; }
+            public int width { get; set; }
+        }
+
+        public class Item {
+            public string album_type { get; set; }
+            public List<string> available_markets { get; set; }
+            public ExternalUrls external_urls { get; set; }
+            public string href { get; set; }
+            public string id { get; set; }
+            public List<Image> images { get; set; }
+            public string name { get; set; }
+            public string type { get; set; }
+            public string uri { get; set; }
+        }
+
+        public string href { get; set; }
+        public List<Item> items { get; set; }
+        public int limit { get; set; }
+        public string next { get; set; }
+        public int offset { get; set; }
+        public object previous { get; set; }
+        public int total { get; set; }
+    }
+
 
     public class APIDebug {
         public string APITime { get; set; }
@@ -50,9 +97,11 @@ namespace SolidJokes.Web.Controllers {
     }
 
     public class ArtistDetailsViewModel {
+        public List<APIDebug> APIDebugList { get; set; }
         public ArtistDetails ArtistDetails { get; set; }
         public ArtistTopTracks ArtistTopTracks { get; set; }
-        public List<APIDebug> APIDebugList { get; set; } 
+        public ArtistAlbums ArtistAlbums { get; set; }
+
     }
 
     public class ArtistTopTracks {

@@ -73,7 +73,7 @@ namespace SolidJokes.Web.Controllers {
             ViewBag.APITime = stopWatchResult.TimeInMs;
 
             var jsonNoArtistsRootElement = JObject.Parse(json)["artists"].ToString();
-            ArtistsResponse result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
+            var result = JsonConvert.DeserializeObject<ArtistsResponse>(jsonNoArtistsRootElement);
 
             ViewBag.ArtistSearchedFor = artist;
 
@@ -117,6 +117,24 @@ namespace SolidJokes.Web.Controllers {
 
         public APIResult CallSpotifyAPIArtistTopTracks(StopWatchResult stopWatchResult, string artistCode) {
             var url = String.Format("https://api.spotify.com/v1/artists/{0}/top-tracks?country=GB", artistCode);
+            var json = CallAPI(stopWatchResult, url);
+            return new APIResult {
+                Json = json,
+                Url = url
+            };
+        }
+
+        public APIResult CallSpotifyAPIArtistAlbums(StopWatchResult stopWatchResult, string artistCode) {
+            var url = String.Format("https://api.spotify.com/v1/artists/{0}/albums?country=GB&limit=50", artistCode);
+            var json = CallAPI(stopWatchResult, url);
+            return new APIResult {
+                Json = json,
+                Url = url
+            };
+        }
+
+        public APIResult CallSpotifyAPIAlbum(StopWatchResult stopWatchResult, string id) {
+            var url = String.Format("https://api.spotify.com/v1/albums/{0}", id);
             var json = CallAPI(stopWatchResult, url);
             return new APIResult {
                 Json = json,
@@ -197,4 +215,6 @@ namespace SolidJokes.Web.Controllers {
             }
         }
     }
+
+
 }
