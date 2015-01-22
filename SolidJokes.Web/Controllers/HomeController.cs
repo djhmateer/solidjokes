@@ -142,6 +142,15 @@ namespace SolidJokes.Web.Controllers {
             };
         }
 
+        public APIResult CallSpotifyAPIArtistRelated(StopWatchResult stopWatchResult, string id) {
+            var url = String.Format("https://api.spotify.com/v1/artists/{0}/related-artists", id);
+            var json = CallAPI(stopWatchResult, url);
+            return new APIResult {
+                Json = json,
+                Url = url
+            };
+        }
+
         private static string CallAPI(StopWatchResult stopWatchResult, string url) {
             var stopWatch = new Stopwatch();
             stopWatch.Start();

@@ -15,12 +15,10 @@
 
         <p><a href="@Model.AlbumDetails.uri">Open direct</a></p>
         <p>Popularity: @Model.AlbumDetails.popularity</p>
+        <p>Release: @Model.AlbumDetails.release_date</p>
     </td>
    
 </table>
-
-
-
 
 <h3>Tracks</h3>
 <table class="table">
@@ -28,7 +26,7 @@
         <tr>
             <td>@item.name</td>
             <td>
-                <audio controls="controls">
+                <audio controls="controls" style="width: 150px; display: block;">
                     <source src="@item.preview_url" type="audio/mpeg">
                     <p>Ooops - please use a more up to date browser so you can preview songs</p>
                 </audio>

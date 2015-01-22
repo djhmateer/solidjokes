@@ -1,13 +1,38 @@
 ﻿@model SolidJokes.Web.Controllers.ArtistDetailsViewModel
 
 <h2>@Model.ArtistDetails.Name</h2>
-<a href="/Home/SpotifyArtistSearch">Search</a>
-@foreach (var item in Model.APIDebugList) {
-    <p>@item.APITime : @item.APIURL</p>
-}
 
-<p><a href="@Model.ArtistDetails.external_urls.Spotify">Open web</a> | <a href="@Model.ArtistDetails.Uri">Open direct</a></p>
-<p>Followers Total: @Model.ArtistDetails.followers.Total | Popularity: @Model.ArtistDetails.Popularity</p>
+<table>
+    <tr>
+        <td>
+            <table>
+                <td>
+                    @if (@Model.ArtistDetails.Images.Count > 0) {
+                        <img src="@Model.ArtistDetails.Images[1].URL" width="300" />
+                    }
+                </td>
+                <td>
+                    <a href="/Home/SpotifyArtistSearch">Search</a>
+                    @foreach (var item in Model.APIDebugList) {
+                        <p>@item.APITime : @item.APIURL</p>
+                    }
+
+                    <p><a href="@Model.ArtistDetails.Uri">Direct</a></p>
+                    <p>Popularity: @Model.ArtistDetails.Popularity</p>
+                    <p>Followers Total: @Model.ArtistDetails.followers.Total</p>
+                </td>
+            </table>
+
+        </td>
+        <td>
+            <h3>Related Artists</h3>
+            @foreach (var item in Model.ArtistRelated.artists) {
+                <a href="/Artist/Details/@item.id">@item.name</a><br />
+            }
+        </td>
+    </tr>
+</table>
+
 
 <h3>Top Tracks</h3>
 <table class="table">
@@ -15,12 +40,12 @@
         <tr>
             <td>@item.name</td>
             <td>
-                <audio controls="controls">
+                <audio controls style="width: 150px; display: block;">
                     <source src="@item.preview_url" type="audio/mpeg">
                     <p>Ooops - please use a more up to date browser so you can preview songs</p>
                 </audio>
             </td>
-            <td><a href="@item.uri">Direct</a> | <a href="@item.href">Web</a></td>
+            <td><a href="@item.uri">Direct</a></td>
             <td>@item.popularity</td>
             <td>@item.album.name</td>
             <td><a href="/Album/Details/@item.album.id"> <img src="@item.album.images[2].url" /> </a></td>
@@ -28,15 +53,21 @@
     }
 </table>
 
-
 <h3>Albums</h3>
 <table class="table">
     @foreach (var item in Model.ArtistAlbums.items) {
         <tr>
             <td>@item.name</td>
-            <td><a href="@item.uri">Direct</a> | @item.album_type</td>
-            <td><a href="/Album/Details/@item.id"> <img src="@item.images[2].url" /></a> </td>
-        </tr>
+            <td><a href="@item.uri">Direct</a></td>
+            <td>
+                <a href="/Album/Details/@item.id">
+                    @if (item.images.Count > 2) {
+                        <img src="@item.images[2].url" />
+                    }
+
+            </a>
+        </td>
+    </tr>
     }
 </table>
 

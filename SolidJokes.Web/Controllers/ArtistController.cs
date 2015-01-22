@@ -37,7 +37,7 @@ namespace SolidJokes.Web.Controllers {
             artistTopTracks.tracks = top5.ToList();
 
 
-            // All Artists albums
+            // All Artists albums - possibly more than 50!
             apiResult = spotifyHelper.CallSpotifyAPIArtistAlbums(stopWatchResult, id);
             var artistAlbums = JsonConvert.DeserializeObject<ArtistAlbums>(apiResult.Json);
             apiDebug = new APIDebug {
@@ -46,16 +46,58 @@ namespace SolidJokes.Web.Controllers {
             };
             apiDebugList.Add(apiDebug);
 
-            // Are there more albums
+            // Artist's related Artists - top 7
+            apiResult = spotifyHelper.CallSpotifyAPIArtistRelated(stopWatchResult, id);
+            ArtistRelated artistRelated = JsonConvert.DeserializeObject<ArtistRelated>(apiResult.Json);
+            var y = artistRelated.artists.Take(7).ToList();
+            artistRelated.artists = y;
+            apiDebug = new APIDebug {
+                APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
+                APIURL = apiResult.Url
+            };
+            apiDebugList.Add(apiDebug);
 
             var vm = new ArtistDetailsViewModel {
                 APIDebugList = apiDebugList,
                 ArtistDetails = artistDetails,
                 ArtistTopTracks = artistTopTracks,
-                ArtistAlbums = artistAlbums
+                ArtistAlbums = artistAlbums,
+                ArtistRelated = artistRelated
             };
             return View(vm);
         }
+    }
+
+    public class ArtistRelated {
+        public class ExternalUrls {
+            public string spotify { get; set; }
+        }
+
+        public class Followers {
+            public object href { get; set; }
+            public int total { get; set; }
+        }
+
+        public class Image {
+            public int height { get; set; }
+            public string url { get; set; }
+            public int width { get; set; }
+        }
+
+        public class Artist {
+            public ExternalUrls external_urls { get; set; }
+            public Followers followers { get; set; }
+            public List<object> genres { get; set; }
+            public string href { get; set; }
+            public string id { get; set; }
+            public List<Image> images { get; set; }
+            public string name { get; set; }
+            public int popularity { get; set; }
+            public string type { get; set; }
+            public string uri { get; set; }
+        }
+
+        public List<Artist> artists { get; set; }
     }
 
     public class ArtistAlbums {
@@ -101,6 +143,7 @@ namespace SolidJokes.Web.Controllers {
         public ArtistDetails ArtistDetails { get; set; }
         public ArtistTopTracks ArtistTopTracks { get; set; }
         public ArtistAlbums ArtistAlbums { get; set; }
+        public ArtistRelated ArtistRelated { get; set; }
 
     }
 
