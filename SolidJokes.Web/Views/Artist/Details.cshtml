@@ -1,4 +1,13 @@
 ﻿@model SolidJokes.Web.Controllers.ArtistDetailsViewModel
+<script type="text/javascript">
+    function toggle_visibility(id) {
+        var e = document.getElementById(id);
+        if (e.style.display == 'block')
+            e.style.display = 'none';
+        else
+            e.style.display = 'block';
+    }
+</script>
 
 <h2>@Model.ArtistDetails.Name</h2>
 
@@ -13,9 +22,12 @@
                 </td>
                 <td>
                     <a href="/Home/SpotifyArtistSearch">Search</a>
-                    @foreach (var item in Model.APIDebugList) {
-                        <p>@item.APITime : @item.APIURL</p>
-                    }
+                    <button id="button" onclick="toggle_visibility('debug');">Toggle</button>
+                    <div id="debug" style="display: none">
+                        @foreach (var item in Model.APIDebugList) {
+                            <p>@item.APITime : @item.APIURL</p>
+                        }
+                    </div>
 
                     <p><a href="@Model.ArtistDetails.Uri">Direct</a></p>
                     <p>Popularity: @Model.ArtistDetails.Popularity</p>
@@ -32,6 +44,16 @@
         </td>
     </tr>
 </table>
+<h3>Biography</h3>
+
+<button id="button" onclick="toggle_visibility('idOfElement');">Toggle</button>
+@foreach (var item in Model.ArtistBiography.response.biographies) {
+    <div id="idOfElement" style="display: none">
+        <span style="white-space: pre-line">
+            <p>@item.text - <a href="@item.url">@item.url</a></p>
+        </span>
+    </div>
+}
 
 
 <h3>Top Tracks</h3>
@@ -61,13 +83,14 @@
             <td><a href="@item.uri">Direct</a></td>
             <td>
                 <a href="/Album/Details/@item.id">
+                    c
                     @if (item.images.Count > 2) {
                         <img src="@item.images[2].url" />
                     }
 
-            </a>
-        </td>
-    </tr>
+                </a>
+            </td>
+        </tr>
     }
 </table>
 

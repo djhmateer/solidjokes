@@ -151,6 +151,18 @@ namespace SolidJokes.Web.Controllers {
             };
         }
 
+        public APIResult CallEchonestAPIArtistBiography(StopWatchResult stopWatchResult, string id) {
+            var echonestAPIKey = "OMO6U4I5XEGVXYCCN ";
+            //http://developer.echonest.com/api/v4/artist/biographies?api_key=FILDTEOIK2HBORODV&id=spotify:artist:4Z8W4fKeB5YxbusRsdQVPb
+            var url = String.Format("http://developer.echonest.com/api/v4/artist/biographies?api_key={0}&id=spotify:artist:{1}",
+                echonestAPIKey, id);
+            var json = CallAPI(stopWatchResult, url);
+            return new APIResult {
+                Json = json,
+                Url = url.Replace(echonestAPIKey, "SECRET")
+            };
+        }
+
         private static string CallAPI(StopWatchResult stopWatchResult, string url) {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -184,6 +196,7 @@ namespace SolidJokes.Web.Controllers {
             return text;
         }
     }
+
 
     public class APIResult {
         public string Json { get; set; }

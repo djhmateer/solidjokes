@@ -9,9 +9,9 @@ using Newtonsoft.Json.Linq;
 namespace SolidJokes.Web.Controllers {
     public class ArtistController : Controller {
         public ActionResult Details(string id) {
-            var spotifyHelper = new SpotifyHelper();
+            var apiHelper = new SpotifyHelper();
             var stopWatchResult = new StopWatchResult();
-            string json = spotifyHelper.CallSpotifyAPIArtist(stopWatchResult: stopWatchResult,
+            string json = apiHelper.CallSpotifyAPIArtist(stopWatchResult: stopWatchResult,
                 artistCode: id);
             ViewBag.Id = id;
             var artistDetails = JsonConvert.DeserializeObject<ArtistDetails>(json);
@@ -23,7 +23,7 @@ namespace SolidJokes.Web.Controllers {
             };
             apiDebugList.Add(apiDebug);
 
-            var apiResult = spotifyHelper.CallSpotifyAPIArtistTopTracks(stopWatchResult, id);
+            var apiResult = apiHelper.CallSpotifyAPIArtistTopTracks(stopWatchResult, id);
             var artistTopTracks = JsonConvert.DeserializeObject<ArtistTopTracks>(apiResult.Json);
             apiDebug = new APIDebug {
                 APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
@@ -38,7 +38,7 @@ namespace SolidJokes.Web.Controllers {
 
 
             // All Artists albums - possibly more than 50!
-            apiResult = spotifyHelper.CallSpotifyAPIArtistAlbums(stopWatchResult, id);
+            apiResult = apiHelper.CallSpotifyAPIArtistAlbums(stopWatchResult, id);
             var artistAlbums = JsonConvert.DeserializeObject<ArtistAlbums>(apiResult.Json);
             apiDebug = new APIDebug {
                 APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
@@ -47,10 +47,26 @@ namespace SolidJokes.Web.Controllers {
             apiDebugList.Add(apiDebug);
 
             // Artist's related Artists - top 7
-            apiResult = spotifyHelper.CallSpotifyAPIArtistRelated(stopWatchResult, id);
+            apiResult = apiHelper.CallSpotifyAPIArtistRelated(stopWatchResult, id);
             ArtistRelated artistRelated = JsonConvert.DeserializeObject<ArtistRelated>(apiResult.Json);
             var y = artistRelated.artists.Take(7).ToList();
             artistRelated.artists = y;
+            apiDebug = new APIDebug {
+                APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
+                APIURL = apiResult.Url
+            };
+            apiDebugList.Add(apiDebug);
+
+            // Biography (Echonest)
+            apiResult = apiHelper.CallEchonestAPIArtistBiography(stopWatchResult, id);
+            ArtistBiography artistBiography = JsonConvert.DeserializeObject<ArtistBiography>(apiResult.Json);
+            // Just get last.fm and Wikipedia entries
+            var a = artistBiography.response.biographies.SingleOrDefault(x => x.url.Contains("wikipedia"));
+            //var b = artistBiography.response.biographies.SingleOrDefault(x => x.url.Contains("last.fm"));
+            artistBiography.response.biographies.Clear();
+            artistBiography.response.biographies.Add(a);
+            //artistBiography.response.biographies.Add(b);
+
             apiDebug = new APIDebug {
                 APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
                 APIURL = apiResult.Url
@@ -62,11 +78,46 @@ namespace SolidJokes.Web.Controllers {
                 ArtistDetails = artistDetails,
                 ArtistTopTracks = artistTopTracks,
                 ArtistAlbums = artistAlbums,
-                ArtistRelated = artistRelated
+                ArtistRelated = artistRelated,
+                ArtistBiography = artistBiography
             };
             return View(vm);
         }
     }
+
+    public class ArtistBiography {
+        public class Status {
+            public string version { get; set; }
+            public int code { get; set; }
+            public string message { get; set; }
+        }
+
+        public class License {
+            public string type { get; set; }
+            public string attribution { get; set; }
+            //public string __invalid_name__attribution-url { get; set; }
+            public string url { get; set; }
+            public string version { get; set; }
+        }
+
+        public class Biography {
+            public string text { get; set; }
+            public string site { get; set; }
+            public string url { get; set; }
+            public License license { get; set; }
+            public bool truncated { get; set; }
+        }
+
+        public class Response {
+            public Status status { get; set; }
+            public int start { get; set; }
+            public int total { get; set; }
+            public List<Biography> biographies { get; set; }
+        }
+
+        public Response response { get; set; }
+    }
+
 
     public class ArtistRelated {
         public class ExternalUrls {
@@ -144,6 +195,7 @@ namespace SolidJokes.Web.Controllers {
         public ArtistTopTracks ArtistTopTracks { get; set; }
         public ArtistAlbums ArtistAlbums { get; set; }
         public ArtistRelated ArtistRelated { get; set; }
+        public ArtistBiography ArtistBiography { get; set; }
 
     }
 
