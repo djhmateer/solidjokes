@@ -95,12 +95,43 @@ namespace SolidJokes.Web.Controllers {
         public ActionResult Spotify() {
             return View();
         }
+
+        public ActionResult SpotifyAuthenticate(){
+            //GET https://accounts.spotify.com/authorize/?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09
+            var client_id = "0fd1718f5ef14cb291ef114a13382d15";
+            //var redirect_uri = "http://localhost:50801/Home/SpotifyCallback";
+            var redirect_uri = "http://www.davesjokes.co.uk/Home/SpotifyCallback";
+            var response_type = "code";
+
+            // need to redirect to spotify passing this data
+
+  //           var scope = 'user-read-private user-read-email';
+  //res.redirect('https://accounts.spotify.com/authorize?' +
+  //  querystring.stringify({
+  //    response_type: 'code',
+  //    client_id: client_id,
+  //    scope: scope,
+  //    redirect_uri: redirect_uri,
+  //    state: state
+  //  }));
+
+            var url = String.Format("https://accounts.spotify.com/authorize/?client_id={0}&response_type={1}&redirect_uri={2}",
+                    client_id, response_type, redirect_uri);
+
+
+            return Redirect(url);
+        }
+
+        public ActionResult SpotifyCallback() {
+            return View();
+        }
     }
 
     public class StopWatchResult {
         public string TimeInMs { get; set; }
         public TimeSpan ElapsedTime { get; set; }
     }
+
     public class SpotifyHelper {
         public string CallSpotifyAPISearch(string artistName, int offset, StopWatchResult stopWatchResult) {
             if (!String.IsNullOrWhiteSpace(artistName)) artistName = HttpUtility.UrlEncode(artistName);
@@ -163,7 +194,7 @@ namespace SolidJokes.Web.Controllers {
             };
         }
 
-        private static string CallAPI(StopWatchResult stopWatchResult, string url) {
+        public static string CallAPI(StopWatchResult stopWatchResult, string url) {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             string text = null;
@@ -196,7 +227,6 @@ namespace SolidJokes.Web.Controllers {
             return text;
         }
     }
-
 
     public class APIResult {
         public string Json { get; set; }

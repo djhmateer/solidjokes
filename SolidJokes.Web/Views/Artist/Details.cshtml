@@ -47,12 +47,14 @@
 <h3>Biography</h3>
 
 <button id="button" onclick="toggle_visibility('idOfElement');">Toggle</button>
-@foreach (var item in Model.ArtistBiography.response.biographies) {
-    <div id="idOfElement" style="display: none">
-        <span style="white-space: pre-line">
-            <p>@item.text - <a href="@item.url">@item.url</a></p>
-        </span>
-    </div>
+@if (Model.ArtistBiography.response.biographies != null) {
+    foreach (var item in Model.ArtistBiography.response.biographies) {
+        <div id="idOfElement" style="display: none">
+            <span style="white-space: pre-line">
+                <p>@item.text - <a href="@item.url">@item.url</a></p>
+            </span>
+        </div>
+    }
 }
 
 
@@ -83,7 +85,6 @@
             <td><a href="@item.uri">Direct</a></td>
             <td>
                 <a href="/Album/Details/@item.id">
-                    c
                     @if (item.images.Count > 2) {
                         <img src="@item.images[2].url" />
                     }

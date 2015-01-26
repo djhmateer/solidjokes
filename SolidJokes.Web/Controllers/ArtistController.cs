@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -60,13 +61,14 @@ namespace SolidJokes.Web.Controllers {
             // Biography (Echonest)
             apiResult = apiHelper.CallEchonestAPIArtistBiography(stopWatchResult, id);
             ArtistBiography artistBiography = JsonConvert.DeserializeObject<ArtistBiography>(apiResult.Json);
-            // Just get last.fm and Wikipedia entries
-            var a = artistBiography.response.biographies.SingleOrDefault(x => x.url.Contains("wikipedia"));
-            //var b = artistBiography.response.biographies.SingleOrDefault(x => x.url.Contains("last.fm"));
-            artistBiography.response.biographies.Clear();
-            artistBiography.response.biographies.Add(a);
-            //artistBiography.response.biographies.Add(b);
-
+            if (artistBiography != null){
+                // Just get last.fm and Wikipedia entries
+                if (artistBiography.response.biographies != null){
+                    var a = artistBiography.response.biographies.SingleOrDefault(x => x.url.Contains("wikipedia"));
+                    artistBiography.response.biographies.Clear();
+                    artistBiography.response.biographies.Add(a);
+                }
+            }
             apiDebug = new APIDebug {
                 APITime = String.Format("{0:0}", stopWatchResult.ElapsedTime.TotalMilliseconds),
                 APIURL = apiResult.Url
