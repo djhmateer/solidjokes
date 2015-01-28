@@ -1,5 +1,9 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SolidJokes.Core.Models;
@@ -96,34 +100,178 @@ namespace SolidJokes.Web.Controllers {
             return View();
         }
 
-        public ActionResult SpotifyAuthenticate(){
+        string redirect_uri = "http://www.davesjokes.co.uk/Home/SpotifyCallback";
+
+        public ActionResult SpotifyAuthenticate() {
             //GET https://accounts.spotify.com/authorize/?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09
             var client_id = "0fd1718f5ef14cb291ef114a13382d15";
-            //var redirect_uri = "http://localhost:50801/Home/SpotifyCallback";
-            var redirect_uri = "http://www.davesjokes.co.uk/Home/SpotifyCallback";
+            //var redirect_url = "http://localhost:50801/Home/SpotifyCallback";
+            
             var response_type = "code";
+            var scope = "user-read-private user-read-email";
 
             // need to redirect to spotify passing this data
 
-  //           var scope = 'user-read-private user-read-email';
-  //res.redirect('https://accounts.spotify.com/authorize?' +
-  //  querystring.stringify({
-  //    response_type: 'code',
-  //    client_id: client_id,
-  //    scope: scope,
-  //    redirect_uri: redirect_uri,
-  //    state: state
-  //  }));
 
-            var url = String.Format("https://accounts.spotify.com/authorize/?client_id={0}&response_type={1}&redirect_uri={2}",
-                    client_id, response_type, redirect_uri);
+            //res.redirect('https://accounts.spotify.com/authorize?' +
+            //  querystring.stringify({
+            //    response_type: 'code',
+            //    client_id: client_id,
+            //    scope: scope,
+            //    redirect_uri: redirect_uri,
+            //    state: state
+            //  }));
 
+            var url = String.Format("https://accounts.spotify.com/authorize/?client_id={0}&response_type={1}&scope={3}&redirect_uri={2}",
+                    client_id, response_type, redirect_uri, scope);
 
             return Redirect(url);
         }
 
-        public ActionResult SpotifyCallback() {
-            return View();
+        public ActionResult SpotifyCallback(string code) {
+            // Have now code authorization code (which can be exchanged for an access token)
+
+            //var redirect_uri = "http://localhost:50801/Home/SpotifyCallback";
+            var url = "https://accounts.spotify.com/api/token";
+
+            // Request access and refresh tokens
+            var postData = new Dictionary<string, string>();
+            postData.Add("grant_type", "authorization_code");
+            postData.Add("code", code);
+            postData.Add("redirect_uri", redirect_uri);
+            var client_id = "0fd1718f5ef14cb291ef114a13382d15";
+            postData.Add("client_id", client_id);
+            var client_secret = "ea47c397921c42ffbd04c53d33685205";
+            postData.Add("client_secret", client_secret);
+
+            HttpContent content = new FormUrlEncodedContent(postData.ToArray());
+
+            var client = new HttpClient();
+
+            var httpResponse = client.PostAsync(url, content);
+
+            var result = httpResponse.Result;
+            //var resultContent = result.Content.ReadAsStringAsync().Result;
+            var resultContent = result.Content.ReadAsStringAsync().Result;
+
+
+            var obj = JsonConvert.DeserializeObject<accesstoken>(resultContent, new JsonSerializerSettings {
+                TypeNameHandling = TypeNameHandling.All,
+                TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+            });
+            var access_token = obj.access_token;
+            // woo I have an access token - time to get details of the user
+
+            url = "https://api.spotify.com/v1/me";
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
+            httpResponse = client.GetAsync(url);
+            //var theStream = client.GetStreamAsync(url);
+
+            //var result2 = httpResponse.Result.Content.ReadAsStringAsync();
+            var result2 = httpResponse.Result.Content.ReadAsStringAsync().Result;
+
+            //var response2 = httpResponse.Result.Content.ReadAsStreamAsync();
+
+            //dynamic obj2 = JsonConvert.DeserializeObject(result2);
+            var meReponse = JsonConvert.DeserializeObject<MeResponse>(result2);
+
+
+            // it works, but string hard to decode as json
+            return View(meReponse);
+        }
+    }
+
+    public class MeResponse {
+        public class ExternalUrls {
+            public string spotify { get; set; }
+        }
+
+        public class Followers {
+            public object href { get; set; }
+            public int total { get; set; }
+        }
+
+        public string country { get; set; }
+        public object display_name { get; set; }
+        public string email { get; set; }
+        public ExternalUrls external_urls { get; set; }
+        public Followers followers { get; set; }
+        public string href { get; set; }
+        public string id { get; set; }
+        public List<object> images { get; set; }
+        public string product { get; set; }
+        public string type { get; set; }
+        public string uri { get; set; }
+    }
+
+    internal class accesstoken {
+        public string access_token { get; set; }
+        public string token_type { get; set; }
+        public int expires_in { get; set; }
+        public string refresh_token { get; set; }
+
+        public AuthenticationToken ToPOCO() {
+            AuthenticationToken token = new AuthenticationToken();
+            token.AccessToken = this.access_token;
+            token.ExpiresOn = DateTime.Now.AddSeconds(this.expires_in);
+            token.RefreshToken = this.refresh_token;
+            token.TokenType = this.token_type;
+
+            return token;
+        }
+    }
+
+    public class AuthenticationToken {
+        private string accessToken;
+
+        /// <summary>
+        /// An access token that can be provided in subsequent calls, for example to Spotify Web API services. 
+        /// 
+        /// refreshes the token automatically if it has expired
+        /// </summary>
+        public string AccessToken {
+            get {
+                if (HasExpired)
+                    Refresh();
+
+                return accessToken;
+            }
+            set {
+                accessToken = value;
+            }
+        }
+
+        /// <summary>
+        /// How the access token may be used: always "Bearer". 
+        /// </summary>
+        public string TokenType { get; set; }
+
+        /// <summary>
+        /// The date/time that this token will become invalid
+        /// </summary>
+        public DateTime ExpiresOn { get; set; }
+
+        /// <summary>
+        /// A token that can be sent to the Spotify Accounts service in place of an authorization code. 
+        /// (When the access code expires, send a POST request to the Accounts service /api/token endpoint, but 
+        /// use this code in place of an authorization code. A new access token and a new refresh token will be returned.) 
+        /// </summary>
+        public string RefreshToken { get; set; }
+
+        /// <summary>
+        /// Determines if this token has expired
+        /// </summary>
+        public bool HasExpired { get { return DateTime.Now > ExpiresOn; } }
+
+        /// <summary>
+        /// Updates this token if it has expired
+        /// </summary>
+        public async void Refresh() {
+            //var token = await SpotifyWebAPI.Authentication.GetAccessToken(this.RefreshToken);
+            //this.accessToken = token.accessToken;
+            //this.ExpiresOn = token.ExpiresOn;
+            //this.RefreshToken = token.RefreshToken;
+            //this.TokenType = this.TokenType;
         }
     }
 
