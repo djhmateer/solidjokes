@@ -100,27 +100,13 @@ namespace SolidJokes.Web.Controllers {
             return View();
         }
 
-        string redirect_uri = "http://www.davesjokes.co.uk/Home/SpotifyCallback";
+        //string redirect_uri = "http://www.davesjokes.co.uk/Home/SpotifyCallback";
+        string redirect_uri = "http://localhost:50801/Home/SpotifyCallback";
 
         public ActionResult SpotifyAuthenticate() {
-            //GET https://accounts.spotify.com/authorize/?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09
             var client_id = "0fd1718f5ef14cb291ef114a13382d15";
-            //var redirect_url = "http://localhost:50801/Home/SpotifyCallback";
-            
             var response_type = "code";
             var scope = "user-read-private user-read-email";
-
-            // need to redirect to spotify passing this data
-
-
-            //res.redirect('https://accounts.spotify.com/authorize?' +
-            //  querystring.stringify({
-            //    response_type: 'code',
-            //    client_id: client_id,
-            //    scope: scope,
-            //    redirect_uri: redirect_uri,
-            //    state: state
-            //  }));
 
             var url = String.Format("https://accounts.spotify.com/authorize/?client_id={0}&response_type={1}&scope={3}&redirect_uri={2}",
                     client_id, response_type, redirect_uri, scope);
@@ -130,28 +116,25 @@ namespace SolidJokes.Web.Controllers {
 
         public ActionResult SpotifyCallback(string code) {
             // Have now code authorization code (which can be exchanged for an access token)
+            var client_id = "0fd1718f5ef14cb291ef114a13382d15";
+            var client_secret = "ea47c397921c42ffbd04c53d33685205";
 
-            //var redirect_uri = "http://localhost:50801/Home/SpotifyCallback";
             var url = "https://accounts.spotify.com/api/token";
 
             // Request access and refresh tokens
-            var postData = new Dictionary<string, string>();
-            postData.Add("grant_type", "authorization_code");
-            postData.Add("code", code);
-            postData.Add("redirect_uri", redirect_uri);
-            var client_id = "0fd1718f5ef14cb291ef114a13382d15";
-            postData.Add("client_id", client_id);
-            var client_secret = "ea47c397921c42ffbd04c53d33685205";
-            postData.Add("client_secret", client_secret);
+            var postData = new Dictionary<string, string>{
+                {"grant_type", "authorization_code"},
+                {"code", code},
+                {"redirect_uri", redirect_uri},
+                {"client_id", client_id},
+                {"client_secret", client_secret}
+            };
 
             HttpContent content = new FormUrlEncodedContent(postData.ToArray());
 
             var client = new HttpClient();
-
             var httpResponse = client.PostAsync(url, content);
-
             var result = httpResponse.Result;
-            //var resultContent = result.Content.ReadAsStringAsync().Result;
             var resultContent = result.Content.ReadAsStringAsync().Result;
 
 
@@ -160,24 +143,33 @@ namespace SolidJokes.Web.Controllers {
                 TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
             });
             var access_token = obj.access_token;
-            // woo I have an access token - time to get details of the user
 
             url = "https://api.spotify.com/v1/me";
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
-            httpResponse = client.GetAsync(url);
-            //var theStream = client.GetStreamAsync(url);
+            var result2 = CallSpotifyAPIPassingToken(access_token, url);
 
-            //var result2 = httpResponse.Result.Content.ReadAsStringAsync();
-            var result2 = httpResponse.Result.Content.ReadAsStringAsync().Result;
-
-            //var response2 = httpResponse.Result.Content.ReadAsStreamAsync();
-
-            //dynamic obj2 = JsonConvert.DeserializeObject(result2);
             var meReponse = JsonConvert.DeserializeObject<MeResponse>(result2);
-
-
-            // it works, but string hard to decode as json
+            meReponse.access_token = access_token;
             return View(meReponse);
+        }
+
+
+        public ActionResult NewReleases(string access_token){
+            // needs oAuth
+            var url = "https://api.spotify.com/v1/browse/new-releases";
+            var result = CallSpotifyAPIPassingToken(access_token, url);
+
+            //var meReponse = JsonConvert.DeserializeObject<MeResponse>(result2);
+            var newReleases = JsonConvert.DeserializeObject(result);
+
+            return View(newReleases);
+        }
+
+        private string CallSpotifyAPIPassingToken(string access_token, string url){
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
+            var httpResponse = client.GetAsync(url);
+            var result = httpResponse.Result.Content.ReadAsStringAsync().Result;
+            return result;
         }
     }
 
@@ -202,6 +194,8 @@ namespace SolidJokes.Web.Controllers {
         public string product { get; set; }
         public string type { get; set; }
         public string uri { get; set; }
+        // dave added
+        public string access_token { get; set; }
     }
 
     internal class accesstoken {

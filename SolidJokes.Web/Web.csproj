@@ -246,11 +246,11 @@
     <Content Include="Views\Joke\Delete.cshtml" />
     <Content Include="Views\Home\Spotify.cshtml" />
     <Content Include="Views\Home\SpotifyArtistSearch.cshtml" />
-    <Content Include="Views\Home\SpotifyAuthTestLogin.cshtml" />
     <Content Include="Views\Artist\Details.cshtml" />
     <Content Include="Views\Album\Details.cshtml" />
     <Content Include="Views\Home\SpotifyCallback.cshtml" />
     <Content Include="Views\Home\SpotifyAuthenticate.cshtml" />
+    <Content Include="Views\Home\NewReleases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

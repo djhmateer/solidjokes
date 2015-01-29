@@ -1,12 +1,14 @@
 ﻿@using System.Web.UI.WebControls
 @model SolidJokes.Web.Controllers.MeResponse
 
+<a href="/Home/NewReleases?access_token=@Model.access_token">Next page</a>
+
 <h2>Me</h2>
 @if (Model != null){
     <p>Name: @Model.display_name</p>
     <p>Email: @Model.email</p>
     <p>Country: @Model.country</p>
-    <p>External urls spotify: @Model.external_urls.spotify</p>
+    <p>External urls spotify: <a href="@Model.external_urls.spotify">@Model.external_urls.spotify</a></p>
     <p>Followers href: @Model.followers.href</p>
     <p>Followers total: @Model.followers.total</p>
     <p>Href: @Model.href</p>

@@ -47,13 +47,20 @@
 <h3>Biography</h3>
 
 <button id="button" onclick="toggle_visibility('idOfElement');">Toggle</button>
-@if (Model.ArtistBiography.response.biographies != null) {
+@if (Model.ArtistBiography.response.biographies.Count > 0) {
     foreach (var item in Model.ArtistBiography.response.biographies) {
-        <div id="idOfElement" style="display: none">
-            <span style="white-space: pre-line">
-                <p>@item.text - <a href="@item.url">@item.url</a></p>
-            </span>
-        </div>
+        if (item != null){
+             <div id="idOfElement" style="display: none">
+                 <span style="white-space: pre-line">
+                     @if (@item.text != null){
+                         if (item.url != null){
+                             <p>@item.text - <a href="@item.url">@item.url</a></p>
+                         }
+                     }
+               
+                 </span>
+             </div>
+         }
     }
 }
 
