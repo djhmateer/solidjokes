@@ -3,7 +3,7 @@ using SolidJokes.Core.Services;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-//test
+//test2
 namespace SolidJokes.Web.Controllers {
     public class HomeController : Controller, IHomeController {
         private readonly IJokeViewer viewer;
