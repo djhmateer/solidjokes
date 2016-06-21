@@ -9,6 +9,7 @@ using System.Web.Mvc;
 namespace SolidJokes.Web.Controllers {
     public static class Helpers
     {
+        //http://stackoverflow.com/questions/1600962/displaying-the-build-date
         public static DateTime GetLinkerTime(this Assembly assembly, TimeZoneInfo target = null)
         {
             var filePath = assembly.Location;
@@ -54,7 +55,10 @@ namespace SolidJokes.Web.Controllers {
                     break;
             }
             DisplayMessageToUserIfRequired(message);
-            ViewBag.DateOfCompile = Assembly.GetExecutingAssembly().GetLinkerTime();
+
+            // build done on west coast USA (Appveyor)
+            // Server is in Ireland so want it to display UK Time.
+            ViewBag.DateOfCompile = Assembly.GetExecutingAssembly().GetLinkerTime().ToLocalTime();
             return View(jokes);
         }
 
@@ -78,6 +82,9 @@ namespace SolidJokes.Web.Controllers {
         }
 
         public ActionResult About() {
+            // build done on west coast USA (Appveyor)
+            // Server is in Ireland so want it to display UK Time.
+            ViewBag.DateOfCompile = Assembly.GetExecutingAssembly().GetLinkerTime().ToLocalTime();
             return View();
         }
     }
