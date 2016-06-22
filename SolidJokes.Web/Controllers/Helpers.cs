@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 
@@ -7,7 +8,7 @@ namespace SolidJokes.Web.Controllers
     public static class Helpers
     {
         //http://stackoverflow.com/questions/1600962/displaying-the-build-date
-        public static DateTime GetLinkerTime(this Assembly assembly, TimeZoneInfo target = null)
+        public static String GetLinkerTime(this Assembly assembly, TimeZoneInfo target = null)
         {
             var filePath = assembly.Location;
             const int c_PeHeaderOffset = 60;
@@ -27,7 +28,13 @@ namespace SolidJokes.Web.Controllers
             var tz = target ?? TimeZoneInfo.Local;
             var localTime = TimeZoneInfo.ConvertTimeFromUtc(linkTimeUtc, tz);
 
-            return localTime;
+            // build done on west coast USA (Appveyor)
+            // Server is in Ireland so want it to display UK Time.
+            var britishZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+            //var linkerTime = Assembly.GetExecutingAssembly().GetLinkerTime();
+            var newDate = TimeZoneInfo.ConvertTime(localTime, TimeZoneInfo.Local, britishZone);
+
+            return newDate.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture); ;
         }
     }
 }

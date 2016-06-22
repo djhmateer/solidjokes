@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Reflection
+@using SolidJokes.Web.Controllers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -36,7 +38,8 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Dave's Jokes (North Europa Hosting)</p>
+            <p>&copy; @DateTime.Now.Year Dave's Jokes </p>
+            <p>Compile Date: @Assembly.GetExecutingAssembly().GetLinkerTime() (UK Time)</p>
         </footer>
     </div>
 

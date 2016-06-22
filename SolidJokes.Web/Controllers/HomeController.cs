@@ -36,7 +36,7 @@ namespace SolidJokes.Web.Controllers
 
             // build done on west coast USA (Appveyor)
             // Server is in Ireland so want it to display UK Time.
-            ViewBag.DateOfCompile = Assembly.GetExecutingAssembly().GetLinkerTime().ToLocalTime();
+            //ViewBag.DateOfCompile = Assembly.GetExecutingAssembly().GetLinkerTime().ToLocalTime();
             return View(jokes);
         }
 
@@ -68,12 +68,12 @@ namespace SolidJokes.Web.Controllers
         {
             // build done on west coast USA (Appveyor)
             // Server is in Ireland so want it to display UK Time.
-            var britishZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
-            var linkerTime = Assembly.GetExecutingAssembly().GetLinkerTime();
-            var newDate = TimeZoneInfo.ConvertTime(linkerTime, TimeZoneInfo.Local, britishZone);
+            //var britishZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+            //var linkerTime = Assembly.GetExecutingAssembly().GetLinkerTime();
+            ////var newDate = TimeZoneInfo.ConvertTime(linkerTime, TimeZoneInfo.Local, britishZone);
 
-            ViewBag.DateOfCompile = newDate
-                .ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+            //ViewBag.DateOfCompile = newDate
+            //    .ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
             return View();
         }
     }
