@@ -25,7 +25,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About", "About", "Home")</li>
 
-                    @if (User.Identity.Name == "davemateer@gmail.com") {
+                    @if (User.Identity.Name == "davemateer@gmail.com")
+                    {
                         <li>@Html.ActionLink("Jokes", "Index", "Joke")</li>
                     }
 
@@ -34,13 +35,15 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year Dave's Jokes </p>
-            <p>Compile Date: @Assembly.GetExecutingAssembly().GetLinkerTime() (UK Time)</p>
-        </footer>
+<div class="container body-content">
+    @RenderBody()
+    @*<footer>&copy; @DateTime.Now.Year Dave's Jokes. Version: @Assembly.GetExecutingAssembly().GetLinkerTime() (UK Time)</footer>*@
+</div>
+<br/>
+    <div id="footer">
+        <div class="container text-center">
+            <p class="text-muted credit">&copy; @DateTime.Now.Year Dave's Jokes. Version: @Assembly.GetExecutingAssembly().GetLinkerTime() (UK Time)</p>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
